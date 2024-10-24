@@ -10,7 +10,6 @@ https://www.rit.edu/carycollection/
 -------
 
 Design Links and Documentation 
-~~~
 
 https://www.figma.com/board/sImOVTmSaxvNN8OfmzzVLP/Capstone-1-Team-7?node-id=0-1&t=jhbv9RPrzXos1Gh7-1
 
