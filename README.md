@@ -7,6 +7,8 @@ Our official repo for our main project
 
 https://www.rit.edu/carycollection/ 
 
+https://digitalcollections.rit.edu/luna/servlet/view/all/what/comic+books?sort=title%2Ccreator%2Cdate&os=150
+
 
 -------
 
