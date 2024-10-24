@@ -2,7 +2,7 @@
 Our official repo for our main project
 
 ------
-# Refrences
+ Refrences
 -
 
 https://www.rit.edu/carycollection/ 
