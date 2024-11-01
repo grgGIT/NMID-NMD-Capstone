@@ -1,4 +1,4 @@
-# NMID + NMD -- Capstone
+# NMID + NMD -- Fall 2024 Capstone
 Our official repo for our main project
 
 ------
