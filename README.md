@@ -1,4 +1,4 @@
-# NMID + NMD-Capstone
+# NMID + NMD -- Capstone
 Our official repo for our main project
 
 ------
