@@ -22,6 +22,14 @@ Shared Google Drive: https://drive.google.com/drive/u/1/folders/0AAQ1uHiV5fSxUk9
 
 -----
 
+Interactive Prototype
+-
+https://design.penpot.app/#/view/3d93a9ae-badf-814e-8005-351bb5dd21b1?page-id=3d93a9ae-badf-814e-8005-351bb5dd21b2&section=interactions&index=0&share-id=cc95e04f-ce02-80da-8005-35457d6d1377
+
+https://editor.p5js.org/grgGIT/sketches/kCwYWBWyJ
+
+-----
+
 Code Walkthrough
 -
 no code yet 
