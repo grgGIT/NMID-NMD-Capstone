@@ -22,6 +22,8 @@ Shared Google Drive: https://drive.google.com/drive/u/1/folders/0AAQ1uHiV5fSxUk9
 
 Proposal Presentation: https://www.figma.com/slides/EPlnSvGUXeXLafgoE063H0/Capstone-Presentation?node-id=1-69&node-type=slide&t=TVjLmtGA68mB2ANF-0
 
+Technical Proposal: https://docs.google.com/document/d/1QiJF1fILmOZjX7Wc1ePHdC3Vg9xiYEfLkcPeR3gin68/edit?tab=t.0
+
 -----
 
 Interactive Prototype
