@@ -20,6 +20,8 @@ FigJam: https://www.figma.com/board/sImOVTmSaxvNN8OfmzzVLP/Capstone-1-Team-7?nod
 
 Shared Google Drive: https://drive.google.com/drive/u/1/folders/0AAQ1uHiV5fSxUk9PVA
 
+Proposal Presentation: https://www.figma.com/slides/EPlnSvGUXeXLafgoE063H0/Capstone-Presentation?node-id=1-69&node-type=slide&t=TVjLmtGA68mB2ANF-0
+
 -----
 
 Interactive Prototype
