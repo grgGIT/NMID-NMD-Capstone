@@ -3,9 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Homepage</title>
 </head>
 <body>
-    
+    <h1>Welcome!</h1>
+    <button onclick="navigateTo('choicePage.html')" id="start">Enter</button>
+<button onclick="navigateTo('database.html')" id="dataB">View Database</button>
+    <script>
+         function navigateTo(page) {
+        window.location.href = page;
+    }
+
+
+    </script>
 </body>
 </html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Poster Creator</title>
+   <style>
+       /* Add any necessary styles here */
+   </style>
+</head>
+<body>
+    <canvas id="canvas" width="1000" height="600"></canvas>
+    <input type="text" id="textInput" placeholder="Enter text">
+    <input type="color" id="colorPicker" value="#000000">
+    <button onclick="savePoster()">Save as PNG</button>
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        let posters = ['assets/images/poster1.jpg', 'assets/images/poster2.jpg', 'assets/images/poster3.jpg'];
+        let posterIndex = 0;
+        let textElements = [];
+        let newText = "meme text";
+        let textColor = '#000000';
+
+        function preload() {
+            // Preload images
+            posters = posters.map(src => {
+                const img = new Image();
+                img.src = src;
+                return img;
+            });
+        }
+
+        function setup() {
+            preload();
+            draw();
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const img = posters[posterIndex];
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            drawTextElements();
+        }
+
+        function drawTextElements() {
+            textElements.forEach(textObj => {
+                ctx.fillStyle = textObj.color;
+                ctx.font = `${textObj.size}px Arial`;
+                ctx.fillText(textObj.text, textObj.x, textObj.y);
+            });
+        }
+
+        document.getElementById('textInput').addEventListener('input', (e) => {
+            newText = e.target.value;
+        });
+
+        document.getElementById('colorPicker').addEventListener('input', (e) => {
+            textColor = e.target.value;
+        });
+
+        canvas.addEventListener('click', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            textElements.push({ text: newText, x, y, size: 32, color: textColor });
+            draw();
+        });
+
+        function savePoster() {
+            const link = document.createElement('a');
+            link.download = 'edited_poster.png';
+            link.href = canvas.toDataURL();
+            link.click();
+
+            const userName = prompt("Enter your name:");
+            const dateTime = new Date().toLocaleString();
+
+            if (userName) {
+                saveToDatabase(userName, dateTime);
+            }
+        }
+
+        function saveToDatabase(name, dateTime) {
+            fetch('/save', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ name, dateTime })
+            })
+            .then(response => response.json())
+            .then(data => console.log('Success:', data))
+            .catch((error) => console.error('Error:', error));
+        }
+
+        setup();
+    </script>
+</body>
+</html>

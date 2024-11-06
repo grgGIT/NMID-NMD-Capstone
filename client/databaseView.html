@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Database View</title>
+   <style>
+       /* Add styles for the gallery and modal */
+       .gallery img {
+           width: 200px;
+           height: auto;
+           cursor: pointer;
+           margin: 10px;
+       }
+       .modal {
+           display: none;
+           position: fixed;
+           top: 0;
+           left: 0;
+           width: 100%;
+           height: 100%;
+           background-color: rgba(0, 0, 0, 0.8);
+           justify-content: center;
+           align-items: center;
+       }
+       .modal-content {
+           background-color: white;
+           padding: 20px;
+           border-radius: 5px;
+           text-align: center;
+       }
+   </style>
+</head>
+<body>
+    <div class="gallery" id="gallery"></div>
+    <div class="modal" id="modal">
+        <div class="modal-content" id="modalContent">
+            <span id="closeModal" style="cursor:pointer;">&times;</span>
+            <img id="modalImage" src="" alt="Poster" style="width: 80%;">
+            <p id="modalText"></p>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            fetch('/getPosters')
+                .then(response => response.json())
+                .then(data => {
+                    const gallery = document.getElementById('gallery');
+                    data.forEach(poster => {
+                        const img = document.createElement('img');
+                        img.src = poster.imagePath;
+                        img.alt = poster.name;
+                        img.onclick = () => showModal(poster);
+                        gallery.appendChild(img);
+                    });
+                });
+
+            const modal = document.getElementById('modal');
+            const closeModal = document.getElementById('closeModal');
+            closeModal.onclick = () => modal.style.display = 'none';
+
+            function showModal(poster) {
+                const modalImage = document.getElementById('modalImage');
+                const modalText = document.getElementById('modalText');
+                modalImage.src = poster.imagePath;
+                modalText.textContent = `Name: ${poster.name}, Date: ${poster.dateTime}`;
+                modal.style.display = 'flex';
+            }
+        });
+    </script>
+</body>
+</html>
