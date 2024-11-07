@@ -1,0 +1,122 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poster Creator</title>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <div id="sidebar">
+        <h3>Menu</h3>
+        <ul>
+            <li><button onclick="changePoster(0)">Poster 1</button></li>
+            <li><button onclick="changePoster(1)">Poster 2</button></li>
+            <li><button onclick="changePoster(2)">Poster 3</button></li>
+        </ul>
+        <h4>Fonts</h4>
+        <ul id="fontList">
+            <!-- Fonts will be dynamically added here -->
+        </ul>
+        <h4>Font Size</h4>
+        <input type="number" id="fontSizeInput" value="20" min="10" max="100">
+        <button onclick="increaseFontSize()">+</button>
+        <button onclick="decreaseFontSize()">-</button>
+    </div>
+    <div id="content">
+        <canvas id="canvas" width="600" height="1000"></canvas>
+        <input type="color" id="colorPicker" value="#000000">
+        <button onclick="savePoster()">Save as PNG</button>
+    </div>
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        let posters = ['assets/posterImages/poster1.jpg', 'assets/posterImages/poster2.jpg', 'assets/posterImages/poster3.jpg'];
+        let posterIndex = 0;
+        let textElements = [
+            { x: 100, y: 200, text: "Text 1", font: "Arial", color: "#000000", size: 20, angle: 45 },
+            { x: 100, y: 400, text: "Text 2", font: "Arial", color: "#000000", size: 20, angle: -45 },
+            { x: 100, y: 600, text: "Text 3", font: "CustomFont1", color: "#000000", size: 20, angle: 180 }
+        ];
+        let fonts = ['CustomFont1', 'CustomFont2' , 'CustomFont3', 'CustomFont4'];
+
+        function preload() {
+            posters = posters.map(src => {
+                const img = new Image();
+                img.src = src;
+                return img;
+            });
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(posters[posterIndex], 0, 0, canvas.width, canvas.height);
+            textElements.forEach(el => {
+                ctx.save();
+                ctx.translate(el.x, el.y);
+                ctx.rotate(el.angle * Math.PI / 180);
+                ctx.font = `${el.size}px ${el.font}`;
+                ctx.fillStyle = el.color;
+                ctx.fillText(el.text, 0, 0);
+                ctx.restore();
+            });
+        }
+
+        function changePoster(index) {
+            if (index >= 0 && index < posters.length) {
+                posterIndex = index;
+                draw();
+            }
+        }
+
+        function savePoster() {
+            const link = document.createElement('a');
+            link.download = 'edited_poster.png';
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+
+        function loadFonts() {
+            const fontList = document.getElementById('fontList');
+            fonts.forEach(font => {
+                const li = document.createElement('li');
+                const button = document.createElement('button');
+                button.textContent = font;
+                button.onclick = () => changeFont(font);
+                li.appendChild(button);
+                fontList.appendChild(li);
+            });
+        }
+
+        function changeFont(font) {
+            textElements.forEach(el => el.font = font);
+            draw();
+        }
+
+        function increaseFontSize() {
+            textElements.forEach(el => el.size += 2);
+            draw();
+        }
+
+        function decreaseFontSize() {
+            textElements.forEach(el => el.size = Math.max(10, el.size - 2));
+            draw();
+        }
+
+        document.getElementById('colorPicker').addEventListener('input', (e) => {
+            textElements.forEach(el => el.color = e.target.value);
+            draw();
+        });
+
+        preload();
+        loadFonts();
+        draw();
+    </script>
+</body>
+</html>

@@ -63,16 +63,18 @@
         <button onclick="savePoster()">Save as PNG</button>
     </div>
     <script>
-        const canvas = document.getElementById('canvas');
+         
+            const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
         let posters = ['assets/posterImages/poster1.jpg', 'assets/posterImages/poster2.jpg', 'assets/posterImages/poster3.jpg'];
         let posterIndex = 0;
         let textElements = [
-            { x: 100, y: 200, text: "Text 1", font: "Arial", color: "#000000", size: 20, angle: 45 },
-            { x: 100, y: 400, text: "Text 2", font: "Arial", color: "#000000", size: 20, angle: -45 },
-            { x: 100, y: 600, text: "Text 3", font: "Arial", color: "#000000", size: 20, angle: 180 }
+            [{ x: 100, y: 200, text: "Text 1", font: "Arial", color: "#000000", size: 50, angle: 45 }],
+            [{ x: 100, y: 400, text: "Text 2", font: "Arial", color: "#000000", size: 80, angle: -33 }],
+            [{ x: 300, y: 600, text: "Text 3", font: "Arial", color: "#000000", size: 60, angle: 180 }]
         ];
-        let fonts = ['CustomFont1', 'CustomFont2' , 'CustomFont3', 'CustomFont4'];
+        let fonts = ['CustomFont1', 'CustomFont2', 'CustomFont3', 'CustomFont4'];
+        let selectedTextElement = null;
 
         function preload() {
             posters = posters.map(src => {
@@ -85,7 +87,7 @@
         function draw() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.drawImage(posters[posterIndex], 0, 0, canvas.width, canvas.height);
-            textElements.forEach(el => {
+            textElements[posterIndex].forEach(el => {
                 ctx.save();
                 ctx.translate(el.x, el.y);
                 ctx.rotate(el.angle * Math.PI / 180);
@@ -99,6 +101,7 @@
         function changePoster(index) {
             if (index >= 0 && index < posters.length) {
                 posterIndex = index;
+                selectedTextElement = null;
                 draw();
             }
         }
@@ -123,28 +126,71 @@
         }
 
         function changeFont(font) {
-            textElements.forEach(el => el.font = font);
-            draw();
+            if (selectedTextElement) {
+                selectedTextElement.font = font;
+                draw();
+            }
+        }
+
+        function updateFontSizeInput() {
+            if (selectedTextElement) {
+                document.getElementById('fontSizeInput').value = selectedTextElement.size;
+            }
         }
 
         function increaseFontSize() {
-            textElements.forEach(el => el.size += 2);
-            draw();
+            if (selectedTextElement) {
+                selectedTextElement.size += 2;
+                updateFontSizeInput();
+                draw();
+            }
         }
 
         function decreaseFontSize() {
-            textElements.forEach(el => el.size = Math.max(10, el.size - 2));
-            draw();
+            if (selectedTextElement) {
+                selectedTextElement.size = Math.max(10, selectedTextElement.size - 2);
+                updateFontSizeInput();
+                draw();
+            }
         }
 
         document.getElementById('colorPicker').addEventListener('input', (e) => {
-            textElements.forEach(el => el.color = e.target.value);
-            draw();
+            if (selectedTextElement) {
+                selectedTextElement.color = e.target.value;
+                draw();
+            }
+        });
+
+        document.getElementById('fontSizeInput').addEventListener('input', (e) => {
+            if (selectedTextElement) {
+                selectedTextElement.size = parseInt(e.target.value, 10);
+                draw();
+            }
+        });
+
+        canvas.addEventListener('click', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            selectedTextElement = textElements[posterIndex].find(el => {
+                const width = ctx.measureText(el.text).width;
+                return x >= el.x && x <= el.x + width && y >= el.y - el.size && y <= el.y;
+            });
+            console.log('Selected Text Element:', selectedTextElement);
+            if (selectedTextElement) {
+                const newText = prompt("Edit text:", selectedTextElement.text);
+                if (newText !== null) {
+                    selectedTextElement.text = newText;
+                    draw();
+                }
+                updateFontSizeInput();
+            }
         });
 
         preload();
         loadFonts();
         draw();
+        
     </script>
 </body>
 </html>
