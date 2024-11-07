@@ -1,0 +1,16 @@
+{
+    "name": "name",
+    "description": "description",
+    "authors": "author",
+    "version": "1.0.0",
+    "main": "pathToMain",
+    "dependencies": {
+        "express": "^4.21.1",
+        "mongoose": "^5.13.22",
+        "socket.io": "^4.8.1"
+    },
+    "scripts": {
+        "start": "node back/server.js"
+    },
+    "keywords": []
+}

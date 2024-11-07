@@ -1,10 +1,17 @@
-// const express = require('express')
-// const path = require('path');
-// const socketIo = require('socket.io');
-// const app = express()
-// const port = 3000
+const express = require('express')
+const path = require('path');
+const socketIo = require('socket.io');
+const app = express()
+const port = 3000;
 
-// app.use(express.static(path.join( __dirname, 'client' ))); 
+const clientPath = path.join( __dirname, '..', 'client' );
+
+app.use(express.static(clientPath)); 
+
+// Your other routes and middleware
+app.get('/', (req, res) => {
+    res.sendFile(path.join(clientPath, 'home.html'));
+});
 
 // const mongoose = require('mongoose');
 
@@ -34,36 +41,36 @@
 // });
 
 
-// app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 
-// module.exports = app
+module.exports = app
 
-const express = require('express');
-const mongoose = require('mongoose');
-const app = express();
+// const express = require('express');
+// //const mongoose = require('mongoose');
+// const app = express();
 
-mongoose.connect('mongodb://localhost:27017/yourDB', { useNewUrlParser: true, useUnifiedTopology: true });
+// mongoose.connect('mongodb://localhost:27017/yourDB', { useNewUrlParser: true, useUnifiedTopology: true });
 
-const saveSchema = new mongoose.Schema({
-    name: String,
-    dateTime: String,
-    imagePath: String 
-});
+// const saveSchema = new mongoose.Schema({
+//     name: String,
+//     dateTime: String,
+//     imagePath: String 
+// });
 
-const Save = mongoose.model('Save', saveSchema);
+// const Save = mongoose.model('Save', saveSchema);
 
-app.use(express.json());
+// app.use(express.json());
 
-app.post('/save', (req, res) => {
-    const newSave = new Save(req.body);
-    newSave.save()
-        .then(() => res.json({ message: 'Save successful' }))
-        .catch(err => res.status(400).json({ error: err.message }));
-});
-app.get('/getPosters', (req, res) => {
-    Save.find({})
-        .then(posters => res.json(posters))
-        .catch(err => res.status(500).json({ error: err.message }));
-});
+// app.post('/save', (req, res) => {
+//     const newSave = new Save(req.body);
+//     newSave.save()
+//         .then(() => res.json({ message: 'Save successful' }))
+//         .catch(err => res.status(400).json({ error: err.message }));
+// });
+// app.get('/getPosters', (req, res) => {
+//     Save.find({})
+//         .then(posters => res.json(posters))
+//         .catch(err => res.status(500).json({ error: err.message }));
+// });
 
-app.listen(3000, () => console.log('Server running on port 3000'));
+// app.listen(3000, () => console.log('Server running on port 3000'));
