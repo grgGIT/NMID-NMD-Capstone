@@ -94,6 +94,13 @@
                 ctx.font = `${el.size}px ${el.font}`;
                 ctx.fillStyle = el.color;
                 ctx.fillText(el.text, 0, 0);
+                // Draw outline if this is the selected text element
+        if (el === selectedTextElement) {
+            const width = ctx.measureText(el.text).width;
+            ctx.strokeStyle = 'red'; // Outline color
+            ctx.lineWidth = 2; // Outline thickness
+            ctx.strokeRect(-2, -el.size, width + 4, el.size + 4); // Adjusted to fit the text
+        }
                 ctx.restore();
             });
         }
