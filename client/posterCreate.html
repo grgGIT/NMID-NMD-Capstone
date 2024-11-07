@@ -1,29 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Poster Creator</title>
-   <style>
-       /* Add any necessary styles here */
-   </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poster Creator</title>
+    <style>
+        @font-face {
+            font-family: 'CustomFont1';
+            src: url('assets/fonts/font1.otf') format('truetype');
+        }
+        @font-face {
+            font-family: 'CustomFont2';
+            src: url('assets/fonts/font2.ttf') format('truetype');
+        }
+        @font-face {
+            font-family: 'CustomFont3';
+            src: url('assets/fonts/font3.ttf') format('truetype');
+        }
+        @font-face {
+            font-family: 'CustomFont4';
+            src: url('assets/fonts/font4.ttf') format('truetype');
+        }
+        body {
+            display: flex;
+            font-family: Arial, sans-serif;
+        }
+        #sidebar {
+            width: 200px;
+            background-color: #f4f4f4;
+            padding: 10px;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+        }
+        #content {
+            flex-grow: 1;
+            padding: 20px;
+        }
+        canvas {
+            border: 1px solid #ccc;
+        }
+    </style>
 </head>
 <body>
-    <canvas id="canvas" width="1000" height="600"></canvas>
-    <input type="text" id="textInput" placeholder="Enter text">
-    <input type="color" id="colorPicker" value="#000000">
-    <button onclick="savePoster()">Save as PNG</button>
+    <div id="sidebar">
+        <h3>Menu</h3>
+        <ul>
+            <li><button onclick="changePoster(0)">Poster 1</button></li>
+            <li><button onclick="changePoster(1)">Poster 2</button></li>
+            <li><button onclick="changePoster(2)">Poster 3</button></li>
+        </ul>
+        <h4>Fonts</h4>
+        <ul id="fontList">
+            <!-- Fonts will be dynamically added here -->
+        </ul>
+        <h4>Font Size</h4>
+        <input type="number" id="fontSizeInput" value="20" min="10" max="100">
+        <button onclick="increaseFontSize()">+</button>
+        <button onclick="decreaseFontSize()">-</button>
+    </div>
+    <div id="content">
+        <canvas id="canvas" width="600" height="1000"></canvas>
+        <input type="color" id="colorPicker" value="#000000">
+        <button onclick="savePoster()">Save as PNG</button>
+    </div>
     <script>
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
-        let posters = ['assets/images/poster1.jpg', 'assets/images/poster2.jpg', 'assets/images/poster3.jpg'];
+        let posters = ['assets/posterImages/poster1.jpg', 'assets/posterImages/poster2.jpg', 'assets/posterImages/poster3.jpg'];
         let posterIndex = 0;
-        let textElements = [];
-        let newText = "meme text";
-        let textColor = '#000000';
+        let textElements = [
+            { x: 100, y: 200, text: "Text 1", font: "Arial", color: "#000000", size: 20, angle: 45 },
+            { x: 100, y: 400, text: "Text 2", font: "Arial", color: "#000000", size: 20, angle: -45 },
+            { x: 100, y: 600, text: "Text 3", font: "Arial", color: "#000000", size: 20, angle: 180 }
+        ];
+        let fonts = ['CustomFont1', 'CustomFont2' , 'CustomFont3', 'CustomFont4'];
 
         function preload() {
-            // Preload images
             posters = posters.map(src => {
                 const img = new Image();
                 img.src = src;
@@ -31,70 +82,69 @@
             });
         }
 
-        function setup() {
-            preload();
-            draw();
-        }
-
         function draw() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            const img = posters[posterIndex];
-            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-            drawTextElements();
-        }
-
-        function drawTextElements() {
-            textElements.forEach(textObj => {
-                ctx.fillStyle = textObj.color;
-                ctx.font = `${textObj.size}px Arial`;
-                ctx.fillText(textObj.text, textObj.x, textObj.y);
+            ctx.drawImage(posters[posterIndex], 0, 0, canvas.width, canvas.height);
+            textElements.forEach(el => {
+                ctx.save();
+                ctx.translate(el.x, el.y);
+                ctx.rotate(el.angle * Math.PI / 180);
+                ctx.font = `${el.size}px ${el.font}`;
+                ctx.fillStyle = el.color;
+                ctx.fillText(el.text, 0, 0);
+                ctx.restore();
             });
         }
 
-        document.getElementById('textInput').addEventListener('input', (e) => {
-            newText = e.target.value;
-        });
-
-        document.getElementById('colorPicker').addEventListener('input', (e) => {
-            textColor = e.target.value;
-        });
-
-        canvas.addEventListener('click', (e) => {
-            const rect = canvas.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            textElements.push({ text: newText, x, y, size: 32, color: textColor });
-            draw();
-        });
+        function changePoster(index) {
+            if (index >= 0 && index < posters.length) {
+                posterIndex = index;
+                draw();
+            }
+        }
 
         function savePoster() {
             const link = document.createElement('a');
             link.download = 'edited_poster.png';
             link.href = canvas.toDataURL();
             link.click();
-
-            const userName = prompt("Enter your name:");
-            const dateTime = new Date().toLocaleString();
-
-            if (userName) {
-                saveToDatabase(userName, dateTime);
-            }
         }
 
-        function saveToDatabase(name, dateTime) {
-            fetch('/save', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ name, dateTime })
-            })
-            .then(response => response.json())
-            .then(data => console.log('Success:', data))
-            .catch((error) => console.error('Error:', error));
+        function loadFonts() {
+            const fontList = document.getElementById('fontList');
+            fonts.forEach(font => {
+                const li = document.createElement('li');
+                const button = document.createElement('button');
+                button.textContent = font;
+                button.onclick = () => changeFont(font);
+                li.appendChild(button);
+                fontList.appendChild(li);
+            });
         }
 
-        setup();
+        function changeFont(font) {
+            textElements.forEach(el => el.font = font);
+            draw();
+        }
+
+        function increaseFontSize() {
+            textElements.forEach(el => el.size += 2);
+            draw();
+        }
+
+        function decreaseFontSize() {
+            textElements.forEach(el => el.size = Math.max(10, el.size - 2));
+            draw();
+        }
+
+        document.getElementById('colorPicker').addEventListener('input', (e) => {
+            textElements.forEach(el => el.color = e.target.value);
+            draw();
+        });
+
+        preload();
+        loadFonts();
+        draw();
     </script>
 </body>
 </html>
