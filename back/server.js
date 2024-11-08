@@ -1,76 +1,62 @@
-const express = require('express')
+const express = require('express');
 const path = require('path');
-const socketIo = require('socket.io');
-const app = express()
+const fs = require('fs');
+const app = express();
 const port = 3000;
 
-const clientPath = path.join( __dirname, '..', 'client' );
+const clientPath = path.join(__dirname, '..', 'client');
+app.use(express.static(clientPath));
+app.use(express.json());
 
-app.use(express.static(clientPath)); 
+const dataFilePath = path.join(__dirname, 'posters.json');
 
-// Your other routes and middleware
-app.get('/', (req, res) => {
-    res.sendFile(path.join(clientPath, 'home.html'));
+// Ensure the data file exists
+if (!fs.existsSync(dataFilePath)) {
+    fs.writeFileSync(dataFilePath, JSON.stringify([]));
+}
+
+app.post('/save', (req, res) => {
+    const { imageData, name, originalPoster } = req.body;
+    const base64Data = imageData.replace(/^data:image\/png;base64,/, "");
+    const filePath = `uploads/${Date.now()}.png`;
+
+    fs.writeFile(filePath, base64Data, 'base64', (err) => {
+        if (err) {
+            return res.status(500).json({ error: 'Failed to save image' });
+        }
+
+        const newPoster = {
+            name,
+            dateTime: new Date().toISOString(),
+            imagePath: filePath,
+            originalPoster
+        };
+
+        fs.readFile(dataFilePath, (err, data) => {
+            if (err) {
+                return res.status(500).json({ error: 'Failed to read data file' });
+            }
+
+            const posters = JSON.parse(data);
+            posters.push(newPoster);
+
+            fs.writeFile(dataFilePath, JSON.stringify(posters, null, 2), (err) => {
+                if (err) {
+                    return res.status(500).json({ error: 'Failed to save data file' });
+                }
+                res.json({ message: 'Save successful' });
+            });
+        });
+    });
 });
 
-// const mongoose = require('mongoose');
+app.get('/getPosters', (req, res) => {
+    fs.readFile(dataFilePath, (err, data) => {
+        if (err) {
+            return res.status(500).json({ error: 'Failed to read data file' });
+        }
+        res.json(JSON.parse(data));
+    });
+});
 
-// mongoose.Promise = global.Promise;
-
-// // Connect MongoDB at default port 27017.
-// mongoose.connect('mongodb://localhost:27017/DB Name', {
-//     useNewUrlParser: true,
-//     useCreateIndex: true,
-// }, (err) => {
-//     if (!err) {
-//         console.log('MongoDB Connection Succeeded.')
-//     } else {
-//         console.log('Error in DB connection: ' + err)
-//     }
-// });
-
-// var array = [{
-//     field:item
-// }, {
-//     field:item
-// }];
-// Model.create(
-//     array
-// ).then((docs) => {
-    
-// });
-
-
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
-
-module.exports = app
-
-// const express = require('express');
-// //const mongoose = require('mongoose');
-// const app = express();
-
-// mongoose.connect('mongodb://localhost:27017/yourDB', { useNewUrlParser: true, useUnifiedTopology: true });
-
-// const saveSchema = new mongoose.Schema({
-//     name: String,
-//     dateTime: String,
-//     imagePath: String 
-// });
-
-// const Save = mongoose.model('Save', saveSchema);
-
-// app.use(express.json());
-
-// app.post('/save', (req, res) => {
-//     const newSave = new Save(req.body);
-//     newSave.save()
-//         .then(() => res.json({ message: 'Save successful' }))
-//         .catch(err => res.status(400).json({ error: err.message }));
-// });
-// app.get('/getPosters', (req, res) => {
-//     Save.find({})
-//         .then(posters => res.json(posters))
-//         .catch(err => res.status(500).json({ error: err.message }));
-// });
-
-// app.listen(3000, () => console.log('Server running on port 3000'));
+app.listen(port, () => console.log(`Server running on port ${port}`));

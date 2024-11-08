@@ -5,7 +5,6 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Database View</title>
    <style>
-       /* Add styles for the gallery and modal */
        .gallery img {
            width: 200px;
            height: auto;
@@ -63,7 +62,11 @@
                 const modalImage = document.getElementById('modalImage');
                 const modalText = document.getElementById('modalText');
                 modalImage.src = poster.imagePath;
-                modalText.textContent = `Name: ${poster.name}, Date: ${poster.dateTime}`;
+                modalText.innerHTML = `
+                    <strong>Name:</strong> ${poster.name}<br>
+                    <strong>Date:</strong> ${new Date(poster.dateTime).toLocaleString()}<br>
+                    <strong>Original Poster:</strong> ${poster.originalPoster}
+                `;
                 modal.style.display = 'flex';
             }
         });

@@ -113,12 +113,49 @@
             }
         }
 
+        //////////////
+        //VERY IMPORTANT, THIS IS WHAT SAVES THE POSTER AS A PNG TO YOUR DOWNLOADS FOLDER
         function savePoster() {
-            const link = document.createElement('a');
-            link.download = 'edited_poster.png';
-            link.href = canvas.toDataURL();
-            link.click();
+    const link = document.createElement('a');
+    link.download = 'edited_poster.png';
+    link.href = canvas.toDataURL();
+    link.click();
+
+    // Define dataURL from the canvas
+    const dataURL = canvas.toDataURL();
+
+    // Send the data URL to the server
+    fetch('/save', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            imageData: dataURL,
+            name: prompt("Enter your name:"),
+            originalPoster: posters[posterIndex].src.split('/').pop() // Get the original poster name
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.message) {
+            alert(data.message);
         }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+
+    // Set up button actions
+    document.getElementById('viewDatabaseButton').onclick = function() {
+        window.location.href = 'databaseView.html';
+    };
+    document.getElementById('goHomeButton').onclick = function() {
+        window.location.href = 'home.html';
+    };
+}
+        ////TRY NOT TO DELETE THIS FUNCTION IT IS ALSO WHAT SENDS IT TO THE SERVER TO BE SHOWN LATER
+        //////////////////
 
         function loadFonts() {
             const fontList = document.getElementById('fontList');
@@ -139,12 +176,14 @@
             }
         }
 
+        //redraws the text and textbox
         function updateFontSizeInput() {
             if (selectedTextElement) {
                 document.getElementById('fontSizeInput').value = selectedTextElement.size;
             }
         }
 
+        // the + button for text size
         function increaseFontSize() {
             if (selectedTextElement) {
                 selectedTextElement.size += 2;
@@ -153,6 +192,7 @@
             }
         }
 
+        // the - button for text size
         function decreaseFontSize() {
             if (selectedTextElement) {
                 selectedTextElement.size = Math.max(10, selectedTextElement.size - 2);
@@ -177,19 +217,23 @@
 
         canvas.addEventListener('click', (e) => {
             const rect = canvas.getBoundingClientRect();
+            //tries to get the textbox for the textelement by its boundaries
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
             selectedTextElement = textElements[posterIndex].find(el => {
                 const width = ctx.measureText(el.text).width;
+                // Adjusted to fit the text
                 return x >= el.x && x <= el.x + width && y >= el.y - el.size && y <= el.y;
             });
             console.log('Selected Text Element:', selectedTextElement);
             if (selectedTextElement) {
+                //a pop up prompt that allows you to change the text in the box
                 const newText = prompt("Edit text:", selectedTextElement.text);
                 if (newText !== null) {
                     selectedTextElement.text = newText;
                     draw();
                 }
+                //redraws with size and such
                 updateFontSizeInput();
             }
         });
