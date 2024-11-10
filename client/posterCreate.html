@@ -64,14 +64,14 @@
     </div>
     <script>
          
-            const canvas = document.getElementById('canvas');
+        const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
         let posters = ['assets/posterImages/poster1.jpg', 'assets/posterImages/poster2.jpg', 'assets/posterImages/poster3.jpg'];
         let posterIndex = 0;
         let textElements = [
-            [{ x: 100, y: 200, text: "Text 1", font: "Arial", color: "#000000", size: 50, angle: 45 }],
-            [{ x: 100, y: 400, text: "Text 2", font: "Arial", color: "#000000", size: 80, angle: -33 }],
-            [{ x: 300, y: 600, text: "Text 3", font: "Arial", color: "#000000", size: 60, angle: 180 }]
+            [{ x: 100, y: 200, text: "Text 1", font: "CustomFont2", color: "#000000", size: 50, angle: 45 }],
+            [{ x: 100, y: 400, text: "Text 2", font: "CustomFont2", color: "#000000", size: 80, angle: -33 }],
+            [{ x: 300, y: 600, text: "Text 3", font: "CustomFont2", color: "#000000", size: 60, angle: 180 }]
         ];
         let fonts = ['CustomFont1', 'CustomFont2', 'CustomFont3', 'CustomFont4'];
         let selectedTextElement = null;
@@ -222,6 +222,7 @@
             const y = e.clientY - rect.top;
             selectedTextElement = textElements[posterIndex].find(el => {
                 const width = ctx.measureText(el.text).width;
+                console.log(width);
                 // Adjusted to fit the text
                 return x >= el.x && x <= el.x + width && y >= el.y - el.size && y <= el.y;
             });
