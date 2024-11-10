@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poster Creation</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+        }
+
+        button {
+            color: white;
+            background-color: transparent;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            width: 97%;
+            margin: 0.5% 0;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 1%;
+            border: 2px solid yellowgreen;
+        }
+
+        nav button {
+            border: none;
+            padding: 1%;
+            font-size: 1.1rem;
+        }
+
+        button:hover {
+            cursor: pointer;
+        }
+
+        .border {
+            border: 1px solid white;
+            border-radius: 3px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+        }
+
+        #content {
+            margin: 1% 2%;
+            border: 2px solid red;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        #poster {
+            height: 80vh;
+            width: 40%;
+            border: 1px solid cyan;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #poster img {
+            object-fit: contain;
+            max-height: 100%;
+        }
+
+        #tools {
+            border: 1px solid rgb(239, 150, 251);
+            height: 40vh;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <button><a href="./choicePage.html">&larr; Exit</a></button>
+        <button class="border">Finish</button>
+    </nav>
+
+    <div id="content">
+
+        <div id="poster">
+            <img src="./assets/posterImages/poster3.jpg" class="border">
+        </div>
+
+        <div id="tools">
+
+            <div id="toolButtons">
+                <button id="undo" class="border">&hookleftarrow;</button>
+                <button id="reset" class="border">Reset</button>
+            </div>
+
+            <div id="toolColumns">
+
+                <div id="toolLabels">
+
+                </div>
+
+                <div id="toolControls">
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div id="backgroundInfo">
+
+        </div>
+
+    </div>
+
+    <script>
+
+
+    </script>
+</body>
+
+</html>
