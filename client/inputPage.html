@@ -64,15 +64,94 @@
             align-items: center;
         }
 
-        #poster img {
+        /* #poster img {
+            object-fit: contain;
+            max-height: 100%;
+        } */
+
+        #poster svg {
             object-fit: contain;
             max-height: 100%;
         }
 
         #tools {
-            border: 1px solid rgb(239, 150, 251);
+            /* border: 1px solid rgb(239, 150, 251); */
             height: 40vh;
+            padding: 1%;
         }
+
+        #toolButtons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5%;
+        }
+
+        #toolButtons button {
+            padding: 2% 3%;
+            font-size: 1.2rem;
+        }
+
+        #undo {
+            aspect-ratio: 3 / 1;
+            font-weight: bolder;
+        }
+
+        #toolColumn {
+            height: 80%;
+            /* border: 1px solid red; */
+        }
+
+        .tool {
+            margin: 8% 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            width: 90%;
+            /* border: 1px solid cyan; */
+        }
+
+        #filter {
+            background-color: transparent;
+            color: white;
+        }
+
+        #filter:hover {
+            cursor: pointer;
+        }
+
+        option {
+            background-color: black;
+            color: white;
+        }
+
+        #colorPicker {
+            background-color: transparent;
+            width: 40%;
+        }
+
+        #colorPicker:hover {
+            cursor: pointer;
+        }
+
+        #textTool {
+            display: block;
+            justify-content: none;
+            align-items: none;
+            height: 50%;
+            /* border: 1px solid yellow; */
+        }
+
+        #textBox {
+            margin: 4% auto;
+            width: 96%;
+            height: 50%;
+            background-color: transparent;
+            color: white;
+            resize: none;
+        }
+
     </style>
 </head>
 
@@ -84,31 +163,57 @@
 
     <div id="content">
 
-        <div id="poster">
-            <img src="./assets/posterImages/poster3.jpg" class="border">
-        </div>
-
         <div id="tools">
 
+            <!-- Undo and Reset Buttons -->
             <div id="toolButtons">
                 <button id="undo" class="border">&hookleftarrow;</button>
                 <button id="reset" class="border">Reset</button>
             </div>
 
-            <div id="toolColumns">
+            <hr>
 
-                <div id="toolLabels">
+            <div id="toolColumn">
 
+                <!-- Filter Tool -->
+                <div class="tool">
+                    <label for="filter">Filter</label>
+
+                    <select name="filter" id="filter" class="border">
+                        <option value="none">None</option>
+                        <option value="light">Light</option>
+                        <option value="pop">Pop</option>
+                    </select>
                 </div>
 
-                <div id="toolControls">
-
+                <!-- Color Tool -->
+                <div class="tool">
+                    <label for="colorPicker">Color</label>
+                    <input name="colorPicker" type="color" id="colorPicker" value="#ffffff">
                 </div>
 
+                <!-- Text Tool -->
+                <div class="tool" id="textTool">
+                    <label for="textBox">Edit Text</label>
+                    <textarea name="textBox" type="text" id="textBox" class="border"></textarea>
+                </div>
             </div>
 
         </div>
 
+        <div id="poster">
+            <svg width="500" height="600">
+                <defs>
+                  <pattern id="background-image" patternUnits="userSpaceOnUse" width="500" height="600">
+                    <image href="./assets/posterImages/poster3.jpg" x="0" y="0" width="500" height="600" />
+                  </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#background-image)" />
+              </svg>
+            <!-- <img src="./assets/posterImages/poster3.jpg" class="border"> -->
+        </div>
+
+        <!-- The modal for the poster background info -->
         <div id="backgroundInfo">
 
         </div>
