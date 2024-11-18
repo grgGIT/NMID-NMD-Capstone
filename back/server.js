@@ -15,6 +15,16 @@ if (!fs.existsSync(dataFilePath)) {
     fs.writeFileSync(dataFilePath, JSON.stringify([]));
 }
 
+// Endpoint to retrieve posters
+app.get('/getPosters', (req, res) => {
+    fs.readFile(dataFilePath, (err, data) => {
+        if (err) {
+            return res.status(500).json({ error: 'Failed to read data file' });
+        }
+        res.json(JSON.parse(data));
+    });
+});
+
 app.post('/save', (req, res) => {
     const { imageData, name, originalPoster } = req.body;
     const base64Data = imageData.replace(/^data:image\/png;base64,/, "");
@@ -50,13 +60,13 @@ app.post('/save', (req, res) => {
     });
 });
 
-app.get('/getPosters', (req, res) => {
-    fs.readFile(dataFilePath, (err, data) => {
-        if (err) {
-            return res.status(500).json({ error: 'Failed to read data file' });
-        }
-        res.json(JSON.parse(data));
-    });
-});
+// app.get('/getPosters', (req, res) => {
+//     fs.readFile(dataFilePath, (err, data) => {
+//         if (err) {
+//             return res.status(500).json({ error: 'Failed to read data file' });
+//         }
+//         res.json(JSON.parse(data));
+//     });
+// });
 
 app.listen(port, () => console.log(`Server running on port ${port}`));
