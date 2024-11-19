@@ -21,15 +21,15 @@ if (!fs.existsSync(editedPath)) {
     fs.writeFileSync(editedPath, JSON.stringify([]));
 }
 // Configure multer for file uploads
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, 'uploads/');
-    },
-    filename: (req, file, cb) => {
-        cb(null, `${Date.now()}-${file.originalname}`);
-    }
-});
-const upload = multer({ storage: storage });
+// const storage = multer.diskStorage({
+//     destination: (req, file, cb) => {
+//         cb(null, 'uploads/');
+//     },
+//     filename: (req, file, cb) => {
+//         cb(null, `${Date.now()}-${file.originalname}`);
+//     }
+// });
+// const upload = multer({ storage: storage });
 
 // Endpoint to retrieve posters
 app.get('/getPosters', (req, res) => {
