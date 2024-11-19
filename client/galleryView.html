@@ -4,84 +4,171 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-   <title>Database View</title>
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+   <title>Community Gallery</title>
    <style>
-        body{ 
+        body { 
             background-color: black;
             font-family: "Inter", Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
         }
-        h1 {
+        .sidebar {
+            color: gold;
+            width: 100px;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            left: 0;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        .sidebar h2 {
+            font-family: "Instrument Serif", Arial, Helvetica, sans-serif;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            font-size: 12em;
+            margin-right: 20px;
+            text-align: center;
+            font-weight: 300;
+            
+        }
+        .gallery-container {
+            flex: 1;
+            /* margin-left: 100px; Matches sidebar width */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 50px;
+        }
+        .gallery img {
+            width: 200px;
+            height: auto;
+            cursor: pointer;
+            border-radius: 5px;
+            box-shadow: 0 2px 8px rgba(255, 255, 255, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .gallery img:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 16px rgba(255, 255, 255, 0.5);
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: left;
+            max-width: 500px;
+            width: 90%;
+        }
+        .modal-content img {
+            width: 100%;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        .modal-content a {
+            color: blue;
+            text-decoration: underline;
+        }
+        #closeModal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 24px;
+            font-weight: bold;
             color: white;
+            cursor: pointer;
         }
-
-       .gallery img {
-           width: 200px;
-           height: auto;
-           cursor: pointer;
-           margin: 10px;
-       }
-       .modal {
-           display: none;
-           position: fixed;
-           top: 0;
-           left: 0;
-           width: 100%;
-           height: 100%;
-           background-color: rgba(0, 0, 0, 0.8);
-           justify-content: center;
-           align-items: center;
-       }
-       .modal-content {
-           background-color: white;
-           padding: 20px;
-           border-radius: 5px;
-           text-align: center;
-       }
    </style>
 </head>
 <body>
-    <h1>Community Gallery</h1>
-    <div class="gallery" id="gallery"></div>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>Poster Wall</h2>
+    </div>
+
+    <!-- Main Content -->
+    <div class="gallery-container">
+        <h1>Community Gallery</h1>
+        <div class="gallery" id="gallery"></div>
+    </div>
+
+    <!-- Modal -->
     <div class="modal" id="modal">
-        <div class="modal-content" id="modalContent">
-            <span id="closeModal" style="cursor:pointer;">&times;</span>
-            <img id="modalImage" src="" alt="Poster" style="width: 80%;">
+        <div class="modal-content">
+            <span id="closeModal">&times;</span>
+            <img id="modalImage" src="" alt="Poster">
             <p id="modalText"></p>
         </div>
     </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Fetch gallery data from the server
             fetch('/getPosters')
                 .then(response => response.json())
                 .then(data => {
                     const gallery = document.getElementById('gallery');
+
+                    // Populate the gallery with images
                     data.forEach(poster => {
                         const img = document.createElement('img');
-                        img.src = poster.imagePath;
-                        img.alt = poster.name;
-                        img.onclick = () => showModal(poster);
+                        img.src = poster.link; // Image URL from JSON
+                        img.alt = poster.title || poster.name || "User Poster";
+                        img.loading = "lazy"; // Lazy loading for performance
+                        img.onclick = () => showModal(poster); // Show modal on click
                         gallery.appendChild(img);
                     });
-                });
+                })
+                .catch(err => console.error('Error fetching posters:', err));
 
             const modal = document.getElementById('modal');
             const closeModal = document.getElementById('closeModal');
-            closeModal.onclick = () => modal.style.display = 'none';
 
+            // Close modal on click of close button
+            closeModal.onclick = () => (modal.style.display = 'none');
+
+            // Show modal with poster details
             function showModal(poster) {
                 const modalImage = document.getElementById('modalImage');
                 const modalText = document.getElementById('modalText');
-                modalImage.src = poster.imagePath;
+
+                modalImage.src = poster.link;
                 modalText.innerHTML = `
-                    <strong>Name:</strong> ${poster.name}<br>
-                    <strong>Date:</strong> ${new Date(poster.dateTime).toLocaleString()}<br>
-                    <strong>Original Poster:</strong> ${poster.originalPoster}
+                    <strong>Editor:</strong> ${poster.name || "Unknown"}<br>
+                    <strong>Original Source:</strong> <a href="${poster['original post']}" target="_blank">View</a><br>
                 `;
                 modal.style.display = 'flex';
             }
+
+            // Close modal on outside click
+            modal.onclick = (event) => {
+                if (event.target === modal) modal.style.display = 'none';
+            };
         });
     </script>
 </body>
 </html>
+
