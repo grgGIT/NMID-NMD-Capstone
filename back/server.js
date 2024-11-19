@@ -8,16 +8,32 @@ const clientPath = path.join(__dirname, '..', 'client');
 app.use(express.static(clientPath));
 app.use(express.json());
 
-const dataFilePath = path.join(__dirname, 'posters.json');
+const originalsPath = path.join(__dirname, 'posters.json');
+const editedPath = path.join(__dirname, 'uploads', 'edited.json');
 
 // Ensure the data file exists
-if (!fs.existsSync(dataFilePath)) {
-    fs.writeFileSync(dataFilePath, JSON.stringify([]));
+if (!fs.existsSync(originalsPath)) {
+    fs.writeFileSync(originalsPath, JSON.stringify([]));
 }
+
+// data file check for the edited.json
+if (!fs.existsSync(editedPath)) {
+    fs.writeFileSync(editedPath, JSON.stringify([]));
+}
+// Configure multer for file uploads
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'uploads/');
+    },
+    filename: (req, file, cb) => {
+        cb(null, `${Date.now()}-${file.originalname}`);
+    }
+});
+const upload = multer({ storage: storage });
 
 // Endpoint to retrieve posters
 app.get('/getPosters', (req, res) => {
-    fs.readFile(dataFilePath, (err, data) => {
+    fs.readFile(originalsPath, (err, data) => {
         if (err) {
             return res.status(500).json({ error: 'Failed to read data file' });
         }
@@ -25,39 +41,72 @@ app.get('/getPosters', (req, res) => {
     });
 });
 
-app.post('/save', (req, res) => {
-    const { imageData, name, originalPoster } = req.body;
-    const base64Data = imageData.replace(/^data:image\/png;base64,/, "");
-    const filePath = `uploads/${Date.now()}.png`;
-
-    fs.writeFile(filePath, base64Data, 'base64', (err) => {
+app.get('/getSavedPosters', (req, res) => {
+    fs.readFile(editedPath, (err, data) => {
         if (err) {
-            return res.status(500).json({ error: 'Failed to save image' });
+            return res.status(500).json({ error: 'Failed to read data file' });
         }
+        res.json(JSON.parse(data));
+    });
+});
+
+
+
+app.post('/save', upload.fields([{ name: 'image' }, { name: 'html' }, { name: 'svg' }]), (req, res) => {
+    // const { imageData, name, originalPoster } = req.body;
+    const { name, originalPoster } = req.body;
+    const imageFile = req.files['image'][0];
+    const htmlFile = req.files['html'][0];
+    const svgFile = req.files['svg'][0];
+    // const base64Data = imageData.replace(/^data:image\/png;base64,/, "");
+    // const filePath = `uploads/${Date.now()}.png`;
+
+    // fs.writeFile(filePath, base64Data, 'base64', (err) => {
+    //     if (err) {
+    //         return res.status(500).json({ error: 'Failed to save image' });
+    //     }
 
         const newPoster = {
             name,
             dateTime: new Date().toISOString(),
             imagePath: filePath,
+            htmlPath: htmlFile.path,
+            svgPath: svgFile.path,
             originalPoster
         };
 
-        fs.readFile(dataFilePath, (err, data) => {
-            if (err) {
-                return res.status(500).json({ error: 'Failed to read data file' });
-            }
+//         fs.readFile(dataFilePath, (err, data) => {
+//             if (err) {
+//                 return res.status(500).json({ error: 'Failed to read data file' });
+//             }
 
-            const posters = JSON.parse(data);
-            posters.push(newPoster);
+//             const posters = JSON.parse(data);
+//             posters.push(newPoster);
 
-            fs.writeFile(dataFilePath, JSON.stringify(posters, null, 2), (err) => {
-                if (err) {
-                    return res.status(500).json({ error: 'Failed to save data file' });
-                }
-                res.json({ message: 'Save successful' });
-            });
-        });
+//             fs.writeFile(dataFilePath, JSON.stringify(posters, null, 2), (err) => {
+//                 if (err) {
+//                     return res.status(500).json({ error: 'Failed to save data file' });
+//                 }
+//                 res.json({ message: 'Save successful' });
+//             });
+//         });
+//     });
+// });
+fs.readFile(editedPath, (err, data) => {
+    if (err) {
+        return res.status(500).json({ error: 'Failed to read data file' });
+    }
+
+    const posters = JSON.parse(data);
+    posters.push(newPoster);
+
+    fs.writeFile(editedPath, JSON.stringify(posters, null, 2), (err) => {
+        if (err) {
+            return res.status(500).json({ error: 'Failed to save data file' });
+        }
+        res.json({ message: 'Save successful' });
     });
+});
 });
 
 // app.get('/getPosters', (req, res) => {
