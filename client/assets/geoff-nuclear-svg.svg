@@ -9,7 +9,7 @@
 	<style>
 		tspan { white-space:pre } 
 		.s0 { fill: none;stroke: none;stroke-width: 15.5 } 
-		.t1 { font-size: 117px;fill: #ffffff;font-weight: 400;font-family: "DelaGothicOne-Regular", "Dela Gothic One"; } 
+		.t1 { font-size: 117px;fill: #ffffff;font-weight: 400;font-family: "font2" } 
 	</style>
 	<use  href="#img1" x="0" y="0"/>
 	<g id="Clip-Path" clip-path="url(#cp1)">

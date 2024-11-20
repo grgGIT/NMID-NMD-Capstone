@@ -6,6 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Poster Creation</title>
     <style>
+        @font-face {
+            font-family: "font2";
+            src: url("./fonts/font2.ttf") format("truetype");
+
+        }
+
         body {
             background-color: black;
             color: white;
@@ -30,7 +36,24 @@
         nav button {
             border: none;
             padding: 1%;
-            font-size: 1.1rem;
+            font-size: 1.5rem;
+        }
+
+        #finishAndReset {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            /* border: 1px solid pink; */
+            width: 12%;
+        }
+
+        #finishAndReset button {
+            padding: 2%;
+        }
+
+        #reset {
+            border: none;
+            font-size: 1.3rem;
         }
 
         button:hover {
@@ -80,7 +103,7 @@
             padding: 1%;
         }
 
-        #toolButtons {
+        /*#toolButtons {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -90,12 +113,12 @@
         #toolButtons button {
             padding: 2% 3%;
             font-size: 1.2rem;
-        }
+        }*/
 
-        #undo {
+        /* #undo {
             aspect-ratio: 3 / 1;
             font-weight: bolder;
-        }
+        } */
 
         #toolColumn {
             height: 80%;
@@ -157,7 +180,11 @@
 <body>
     <nav>
         <button><a href="./choicePage.html">&larr; Exit</a></button>
-        <button class="border">Finish</button>
+        <div id="finishAndReset">
+            <button id="reset" class="border">Reset</button>
+            <button class="border">Finish</button>
+        </div>
+
     </nav>
 
     <div id="content">
@@ -178,19 +205,18 @@
               </svg> -->
 
             <!-- Use an object element to load the SVG -->
-            <object id="svgObject" type="image/svg+xml" width="500" height="600"
-                data="assets/geoff-nuclear-svg.svg"></object>
+            <object id="svgObject" type="image/svg+xml" width="500" height="600" data=""></object>
         </div>
 
         <div id="tools">
 
             <!-- Undo and Reset Buttons -->
-            <div id="toolButtons">
+            <!-- <div id="toolButtons">
                 <button id="undo" class="border">&hookleftarrow;</button>
                 <button id="reset" class="border">Reset</button>
             </div>
 
-            <hr>
+            <hr> -->
 
             <div id="toolColumn">
 
@@ -227,13 +253,23 @@
         const textArea = document.getElementById('textBox');
         const colorPicker = document.getElementById('colorPicker');
         const filterMenu = document.getElementById('filter');
+        const svgObject = document.getElementById('svgObject');
 
-        window.onload = () => {
+        window.onload = async () => {
+            let response = await fetch('/getSelectedPosterNumber', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            });
+            let parsedResponse = await response.json();
+            console.log(parsedResponse.id, parsedResponse.svg);
 
+            svgObject.data = parsedResponse.svg;
         };
 
         // Wait for the SVG to load
-        document.getElementById('svgObject').addEventListener('load', function () {
+        svgObject.addEventListener('load', function () {
             const svgDoc = this.contentDocument;
 
             const svgElement = svgDoc.querySelector('*');
