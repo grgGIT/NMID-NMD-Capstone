@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editable SVG Text</title>
+    <style>
+        .t1 {
+            font-family: Arial, sans-serif;
+            font-size: 24px;
+        }
+        body{
+            background-color: aliceblue;
+        }
+    </style>
+</head>
+<body>
+    <!-- Use an object element to load the SVG -->
+    <object id="svgObject" type="image/svg+xml" width="500" height="500" data="assets/geoff-nuclear-svg.svg"></object>
+
+    <script>
+        // Wait for the SVG to load
+        document.getElementById('svgObject').addEventListener('load', function() {
+            const svgDoc = this.contentDocument;
+            const textElement = svgDoc.getElementById('editableText'); // Ensure this ID matches the SVG's text element ID
+
+            if (textElement) {
+                // Add a click event listener to the text element
+                textElement.addEventListener('click', function() {
+                    // Prompt the user for new text
+                    const newText = prompt('Enter new text:', textElement.textContent);
+
+                    // If the user entered new text, update the text content
+                    if (newText !== null) {
+                        textElement.textContent = newText;
+                    }
+                });
+            } else {
+                console.error('Text element not found in SVG');
+            }
+        });
+    </script>
+</body>
+</html>

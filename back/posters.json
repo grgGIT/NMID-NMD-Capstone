@@ -11,7 +11,7 @@
     {
         "id": 2,
         "name": "Jane",
-        "avatar": "https://www.gravatar.com/avatar/1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7",
+        "avatar": "httoriginalsPathps://www.gravatar.com/avatar/1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7",
         "email": "jane.d.doe@examplepetstore.com",
         "link": "assets/posterImages/poster2.jpg",
         "password": "abcdef", 
