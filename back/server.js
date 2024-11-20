@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const fs = require('fs');
 const app = express();
-const port = 3000;
+const port = process.env.PORT || process.env.NODE_PORT || 3000;
 
 const clientPath = path.join(__dirname, '..', 'client');
 app.use(express.static(clientPath));
