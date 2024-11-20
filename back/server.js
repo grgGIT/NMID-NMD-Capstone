@@ -121,5 +121,8 @@ app.get('/getSavedPosters', (req, res) => {
 //         res.json(JSON.parse(data));
 //     });
 // });
-
+// Define a route to serve the homepage
+app.get('/', (req, res) => {
+    res.sendFile(path.join( __dirname, '../client/homepage/index.html'));
+});
 app.listen(port, () => console.log(`Server running on port ${port}`));

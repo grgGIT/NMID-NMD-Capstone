@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="homepage/style.css">
+
+    <!--Instrument Serif, has regular and italics, no light-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+
+    <!--Adobe Fonts-->
+    <link rel="stylesheet" href="https://use.typekit.net/msx0xtk.css">
+</head>
+
+<body>
+    <div id="container">
+        <div class="section" id="section-1">
+
+            <video autoplay muted loop class="background-video">
+                <source src="homepage/vid/C1_Home_Animation_home01.mp4" type="video/mp4">
+            </video>
+
+            <div class="small-header top-left"><img src="homepage/img/logo.png" alt="logo_cary" class="logo"></div>
+            <div class="small-header top-left2"><img src="homepage/img/caryLogo 2.png" alt="logo-RIT" class="logo2"></div>
+            <div class="small-header bottom-left clickable" data-target="section-2">
+                <span class="arrow">&darr;</span>
+            </div>
+
+            <div class="header-button">
+                <h1 class="large-header">
+                    <span class="first-part">The Living</span><br>
+                    <span class="second-part">Collection</span>
+                </h1>
+                <h1 class="tagline">
+                    channel the classics, craft your own poster
+                </h1>
+                <div class="button-container">
+                    <button class="outlined-button button1">
+                        <span class="button-text">Begin Creating</span>
+                    </button>
+                    <button class="outlined-button button2">
+                        <span class="button-text">See What Others Made</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="section" id="section-2">
+            <div class="small-header top-left"><img src="homepage/img/logo.png" alt="logo_cary" class="logo"></div>
+            <div class="small-header top-left2"><img src="homepage/img/caryLogo 2.png" alt="logo-RIT" class="logo2"></div>
+            <div class="content-wrapper">
+                <div class="text-content">
+                    <h2>RIT Presented with <br>the Cary Collection</h2>
+                    <p>
+                        The Cary Collection’s original collection of 2,300 volumes was assembled by the New York City
+                        businessman Melbert B. Cary Jr. during the 1920s and 1930s. Cary was director of Continental
+                        Type Founders Association, a former president of the American Institute of Graphic Arts, and
+                        proprietor of the private Press of the Woolly Whale. In 1969, the books that formed the nucleus
+                        of the Cary Graphic Arts Collection were presented to RIT by the Mary Flagler Cary Charitable
+                        Trust, as a memorial to Mr. Cary.
+                    </p>
+                    <button class="outlined-button button3 clickable" data-target="section-1">
+                        <span class="button-text">Back to the Exhibit&ensp; &uarr;</span>
+                    </button>
+                </div>
+                <div class="image-content">
+                    <div class="image-overlay">
+                        <h3>1969</h3>
+                    </div>
+                    <img src="homepage/img/press.png" alt="second-image">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="homepage/script.js">
+        
+    </script>
+</body>
+
+</html>
