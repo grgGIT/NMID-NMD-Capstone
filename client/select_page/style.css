@@ -1,0 +1,97 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    font-family: "mr-eaves-modern", sans-serif;
+    font-style: normal;
+    background-color: black;
+}
+
+.continue-button {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.6rem 2rem;
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: #E9AF66;
+    background: transparent;
+    border-radius: 5px;
+    cursor: pointer;
+    white-space: nowrap;
+    font-family: "mr-eaves-modern", sans-serif;
+    font-style: normal;
+    border: 2px solid #E9AF66;
+    bottom: 5%;
+    right: 5%;
+    opacity: 60%;
+}
+
+.confirm {
+    opacity: 100%;
+}
+
+.exit-button {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem 4rem;
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: #E9AF66;
+    background: transparent;
+    border-radius: 5px;
+    cursor: pointer;
+    white-space: nowrap;
+    font-family: "mr-eaves-modern", sans-serif;
+    font-style: normal;
+    border: none;
+    top: 5%;
+    left: 3%;
+}
+
+.exit-button .arrow {
+
+    margin-right: 5%;
+
+}
+
+/* Poster Classes */
+
+#postersContainer {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+}
+.poster {
+    flex: 1;
+    max-width: 20%;
+    margin: 5%;
+    padding: 20px;
+    background-color: #000000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+}
+.poster strong {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.poster a {
+    text-decoration: none;
+}
+
+
