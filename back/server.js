@@ -50,6 +50,24 @@ app.get('/getSavedPosters', (req, res) => {
     });
 });
 
+app.get('/getSelectedPosterNumber', (req, res) => {
+    const posterId = parseInt(req.query.id, 10); // Get the ID from query parameters
+
+    fs.readFile(originalsPath, (err, data) => {
+        if (err) {
+            return res.status(500).json({ error: 'Failed to read data file' });
+        }
+
+        const posters = JSON.parse(data);
+        const selectedPoster = posters.find(poster => poster.id === posterId);
+
+        if (!selectedPoster) {
+            return res.status(404).json({ error: 'Poster not found' });
+        }
+
+        res.json({ id: selectedPoster.id });
+    });
+});
 
 
 // app.post('/save', upload.fields([{ name: 'image' }, { name: 'html' }, { name: 'svg' }]), (req, res) => {
