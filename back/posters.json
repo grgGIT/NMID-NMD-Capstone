@@ -11,7 +11,7 @@
     {
         "id": 2,
         "name": "Jane",
-        "avatar": "httoriginalsPathps://www.gravatar.com/avatar/1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7",
+        "original post": "httoriginalsPathps://www.gravatar.com/avatar/1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7",
         "email": "jane.d.doe@examplepetstore.com",
         "link": "assets/posterImages/poster2.jpg",
         "password": "abcdef", 
@@ -20,7 +20,7 @@
     {
         "id": 3,
         "name": "Alice",
-        "avatar": "https://www.gravatar.com/avatar/3b4c5d6e7f8g9h0i1j2k3l4m5n6o7p8q",
+        "original post": "https://www.gravatar.com/avatar/3b4c5d6e7f8g9h0i1j2k3l4m5n6o7p8q",
         "email": "alice.w.wonderland@examplepetstore.com",
         "link": "assets/posterImages/poster3.jpg",
         "password": "qwerty",
@@ -28,6 +28,26 @@
     },
     {
         "id": 4,
+        "name": " Chéret, Jules ",
+        "title" : "Hippodrome au Pont de l'Alma",
+        "original post": "https://digitalcollections.rit.edu/luna/servlet/detail/RIT~1~1~692~5016:Hippodrome-au-Pont-de-L-Alma---Cade?sort=title%2Ccreator%2Cdate&qvq=q:filename%3D%22cc_poster4050.jpg%22;sort:title%2Ccreator%2Cdate;lc:RIT~1~1&mi=0&trs=1",
+        "email": "john.c.calhoun@examplepetstore.com",
+        "link": "assets/posterImages/cbPost.svg",
+        "password": "123456",
+        "font": "assets/fonts/font3.ttf"
+    },
+    {
+        "id": 5,
+        "name": " Chéret, Jules ",
+        "title" : "Hippodrome au Pont de l'Alma",
+        "original post": "https://digitalcollections.rit.edu/luna/servlet/detail/RIT~1~1~692~5016:Hippodrome-au-Pont-de-L-Alma---Cade?sort=title%2Ccreator%2Cdate&qvq=q:filename%3D%22cc_poster4050.jpg%22;sort:title%2Ccreator%2Cdate;lc:RIT~1~1&mi=0&trs=1",
+        "email": "john.c.calhoun@examplepetstore.com",
+        "link": "assets/posterImages/cbPost.svg",
+        "password": "123456",
+        "font": "assets/fonts/font3.ttf"
+    },
+    {
+        "id": 6,
         "name": " Chéret, Jules ",
         "title" : "Hippodrome au Pont de l'Alma",
         "original post": "https://digitalcollections.rit.edu/luna/servlet/detail/RIT~1~1~692~5016:Hippodrome-au-Pont-de-L-Alma---Cade?sort=title%2Ccreator%2Cdate&qvq=q:filename%3D%22cc_poster4050.jpg%22;sort:title%2Ccreator%2Cdate;lc:RIT~1~1&mi=0&trs=1",
