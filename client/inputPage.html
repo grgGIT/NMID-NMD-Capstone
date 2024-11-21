@@ -180,7 +180,7 @@
     <nav>
         <button><a href="./choicePage.html">&larr; Exit</a></button>
         <div id="finishAndReset">
-            <button class="border">Finish</button>
+            <button class="border" id="finishButton">Finish</button>
         </div>
 
     </nav>
@@ -204,7 +204,7 @@
 
             <!-- Use an object element to load the SVG -->
             <!-- <object id="svgObject" type="image/svg+xml" width="500" height="600" data=""></object> -->
-             <svg id="svgObject"></svg>
+            <svg id="svgObject"></svg>
         </div>
 
         <div id="tools">
@@ -275,8 +275,8 @@
             // svgObject.data = parsedResponse.svg;
         };
 
-       
-        function svgSetup () {
+
+        function svgSetup() {
 
             // const svgDoc = this.contentDocument;
 
@@ -335,34 +335,34 @@
         }
 
         document.getElementById('finishButton').addEventListener('click', async () => {
-    // Capture the SVG data
-    const svgData = svgObject.outerHTML;
+            // Capture the SVG data
+            const svgData = svgObject.outerHTML;
 
-    // Prompt the user for additional information
-    const additionalInfo = prompt('Enter additional information for the poster:');
+            // Prompt the user for additional information
+            const additionalInfo = prompt('Enter additional information for the poster:');
 
-    // Create an object to hold the SVG and additional data
-    const posterData = {
-        svg: svgData,
-        info: additionalInfo
-    };
+            // Create an object to hold the SVG and additional data
+            const posterData = {
+                svg: svgData,
+                info: additionalInfo
+            };
 
-    // Send the data to the server
-    try {
-        const response = await fetch('/savePoster', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(posterData)
+            // Send the data to the server
+            try {
+                const response = await fetch('/savePoster', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(posterData)
+                });
+
+                const result = await response.json();
+                console.log('Success:', result);
+            } catch (error) {
+                console.error('Error:', error);
+            }
         });
-
-        const result = await response.json();
-        console.log('Success:', result);
-    } catch (error) {
-        console.error('Error:', error);
-    }
-});
 
     </script>
 </body>
