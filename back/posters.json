@@ -1,46 +1,5 @@
 [
     {
-        "id": 1,
-        "name": "John",
-        "original post": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50",
-        "creator": "john.c.calhoun@examplepetstore.com",
-        "link": "assets/posterImages/poster1.jpg",
-        "password": "123456",
-        "font": "assets/fonts/font1.otf"
-    },
-    {
-        "id": 2,
-        "name": "Jane",
-        "original post": "httoriginalsPathps://www.gravatar.com/avatar/1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7",
-        "creator": "jane.d.doe@examplepetstore.com",
-        "link": "assets/posterImages/poster2.jpg",
-        "password": "abcdef", 
-        "font": "assets/fonts/font2.ttf"
-    },
-    {
-        "id": 3,
-        "name": "Alice",
-        "original post": "https://www.gravatar.com/avatar/3b4c5d6e7f8g9h0i1j2k3l4m5n6o7p8q",
-        "creator": "alice.w.wonderland@examplepetstore.com",
-        "link": "assets/posterImages/poster3.jpg",
-        "password": "qwerty",
-        "font": "assets/fonts/font2.ttf"
-    },
-    {
-        "id": 4,
-        "name": " Chéret, Jules ",
-        "title" : "Hippodrome au Pont de l'Alma",
-        "original post": "https://digitalcollections.rit.edu/luna/servlet/detail/RIT~1~1~692~5016:Hippodrome-au-Pont-de-L-Alma---Cade?sort=title%2Ccreator%2Cdate&qvq=q:filename%3D%22cc_poster4050.jpg%22;sort:title%2Ccreator%2Cdate;lc:RIT~1~1&mi=0&trs=1",
-        "creator": "john.c.calhoun@examplepetstore.com",
-        "link": "assets/posterImages/cbPost.svg",
-        "password": "123456",
-        "font": "assets/fonts/font3.ttf"
-    },
-
-
-
-
-    {
         "id": 5,
         "name": " ball ",
         "title" : "Hippodrome au Pont de l'Alma",
@@ -57,7 +16,7 @@
         "title" : "Hippodrome au Pont de l'Alma",
         "original post": "https://digitalcollections.rit.edu/luna/servlet/detail/RIT~1~1~692~5016:Hippodrome-au-Pont-de-L-Alma---Cade?sort=title%2Ccreator%2Cdate&qvq=q:filename%3D%22cc_poster4050.jpg%22;sort:title%2Ccreator%2Cdate;lc:RIT~1~1&mi=0&trs=1",
         "creator": "john.c.calhoun@examplepetstore.com",
-        "link": "assets/originalWorks/ball.png",
+        "link": "assets/originalWorks/guidebook.png",
         "password": "123456",
         "font": "assets/fonts/font3.ttf",
         "svg": "assets/posterImages/geoff-nuclear-svg.svg"
@@ -75,11 +34,11 @@
     },
     {
         "id": 8,
-        "name": " Chéret, Jules ",
+        "name": "  ",
         "title" : "Hippodrome au Pont de l'Alma",
         "original post": "https://digitalcollections.rit.edu/luna/servlet/detail/RIT~1~1~692~5016:Hippodrome-au-Pont-de-L-Alma---Cade?sort=title%2Ccreator%2Cdate&qvq=q:filename%3D%22cc_poster4050.jpg%22;sort:title%2Ccreator%2Cdate;lc:RIT~1~1&mi=0&trs=1",
         "creator": "john.c.calhoun@examplepetstore.com",
-        "link": "assets/originalWorks/nuclear-policy.png",
+        "link": "assets/originalWorks/oblivion.jpg",
         "password": "123456",
         "font": "assets/fonts/font3.ttf",
         "svg": "assets/posterImages/geoff-nuclear-svg.svg"
