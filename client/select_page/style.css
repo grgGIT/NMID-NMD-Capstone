@@ -1,0 +1,149 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    font-family: "mr-eaves-modern", sans-serif;
+    font-style: normal;
+    background-color: black;
+}
+
+.continue-button {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.6rem 2rem;
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: #E9AF66;
+    background: transparent;
+    border-radius: 5px;
+    cursor: pointer;
+    white-space: nowrap;
+    font-family: "mr-eaves-modern", sans-serif;
+    font-style: normal;
+    border: 2px solid #E9AF66;
+    bottom: 5%;
+    right: 5%;
+    opacity: 0.6;
+}
+
+.continue-button.enabled {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.exit-button {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem 4rem;
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: #E9AF66;
+    background: transparent;
+    border-radius: 5px;
+    cursor: pointer;
+    white-space: nowrap;
+    font-family: "mr-eaves-modern", sans-serif;
+    font-style: normal;
+    border: none;
+    top: 5%;
+    left: 3%;
+}
+
+.exit-button .arrow {
+    margin-right: 5%;
+}
+
+/* Poster Classes */
+
+#postersContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    height: 100vh;
+    overflow-x: auto;
+    background: #000000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    perspective: 1000px; /* Add perspective for 3D effect */
+}
+
+.poster {
+    flex: 0 0 auto; /* Prevent flex items from growing */
+    min-width: 150px;
+    max-width: 150px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    cursor: pointer;
+}
+
+.poster.active {
+    transform: scale(1.2); /* Enlarge the active poster */
+    opacity: 1;
+}
+
+.poster.inactive {
+    transform: scale(0.8); /* Shrink the inactive posters */
+    opacity: 0.6;
+}
+
+.poster img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+#infoPane {
+    position: relative;
+    margin: auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 5px;
+    width: 80%;
+    max-width: 500px;
+    z-index: 1001; /* Ensure it's above the overlay */
+}
+
+#infoPane.active {
+    display: block;
+}
+
+#infoPane h2 {
+    margin-top: 0;
+}
+
+#closeBtn {
+    background: none;
+    border: none;
+    font-size: 18px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+.overlay {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.overlay.active {
+    display: block; /* Show when active */
+}

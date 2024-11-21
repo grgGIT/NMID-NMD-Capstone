@@ -240,18 +240,18 @@ p {
 
 .text-content h2 {
     font-family: 'Instrument Serif', serif;
-    font-size: 5.5rem;
+    font-size: 5.3rem;
     margin-bottom: 1rem;
     font-weight: 300;
     color: #E9AF66;
-    line-height: 1.2;
+    line-height: 1;
 }
 
 .text-content p {
     font-family: 'Poppins', sans-serif;
     font-size: 1.2rem;
     line-height: 1.6;
-    color: #E9AF66;
+    color: #ffffff;
 }
 
 .image-content {
@@ -275,27 +275,8 @@ p {
     left: 2%;
 }
 
-.image-overlay {
-    position: absolute;
-    top: 10px;
-    left: -10%;
-    background-color: transparent;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-    z-index: 2;
-    opacity: 90%;
-}
-
-.image-overlay h3 {
-    font-family: 'Instrument Serif', serif;
-    font-style: italic;
-    font-size: 10.2rem;
-    color: #E9AF66;
-    font-weight: 200;
-}
-
 .button3 {
-    margin-top: 5%;
+    margin-top: 3%;
     color: #E9AF66;
     border: 0;
     border: 2px solid #E9AF66;
@@ -318,4 +299,45 @@ p {
     margin-left: 34%;
     margin-bottom: 6%;
 
+}
+
+.qr-container {
+
+    display: flex;
+    flex-direction: row;
+    margin-top: 4%;
+    margin-bottom: 2%;
+
+}
+
+.qr {
+    border-radius: 5px;
+    width: 17%;
+    height: auto;
+    background: #ffffff;
+    margin-right: 4%;
+}
+
+h3 {
+    font-family: "mr-eaves-modern", sans-serif;
+    font-style: normal;
+    color: #E9AF66;
+    font-size: 2em;
+    font-weight: 400;
+}
+
+.qr-text {
+
+    flex-direction: column;
+    margin-left: 2%;
+
+}
+
+.qr-text p {
+
+    color: #ffffff;
+    font-weight: 300;
+    font-size: 1.2em;
+    margin-top: 3%;
+    
 }

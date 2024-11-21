@@ -41,10 +41,10 @@
                     channel the classics, craft your own poster
                 </h1>
                 <div class="button-container">
-                    <button class="outlined-button button1">
+                    <button id="createButton"class="outlined-button button1">
                         <span class="button-text">Begin Creating</span>
                     </button>
-                    <button class="outlined-button button2">
+                    <button id="galleryButton" class="outlined-button button2">
                         <span class="button-text">See What Others Made</span>
                     </button>
                 </div>
@@ -57,28 +57,39 @@
                 <div class="text-content">
                     <h2>RIT Presented with <br>the Cary Collection</h2>
                     <p>
-                        The Cary Collection’s original collection of 2,300 volumes was assembled by the New York City
-                        businessman Melbert B. Cary Jr. during the 1920s and 1930s. Cary was director of Continental
-                        Type Founders Association, a former president of the American Institute of Graphic Arts, and
-                        proprietor of the private Press of the Woolly Whale. In 1969, the books that formed the nucleus
-                        of the Cary Graphic Arts Collection were presented to RIT by the Mary Flagler Cary Charitable
-                        Trust, as a memorial to Mr. Cary.
+                        The Cary Graphic Arts Collection at RIT Libraries is one of the world’s premier libraries on
+                                    graphic communication history and practices. This collection, donated as a memorial to Melbert
+                                    B. Cary in 1969, is a valuable resource for research and inspiration.
                     </p>
+                    <div class="qr-container">
+                        <img class="qr" src="homepage/img/qr-code.png">
+                        <div class="qr-text">
+                            <h3>
+                                Book the Appointment
+                            </h3>
+                            <p>
+                                Scan the QR code to <br>connect with curators.
+                            </p>
+                        </div>
+                    </div>
                     <button class="outlined-button button3 clickable" data-target="section-1">
                         <span class="button-text">Back to the Exhibit&ensp; &uarr;</span>
                     </button>
                 </div>
                 <div class="image-content">
-                    <div class="image-overlay">
-                        <h3>1969</h3>
-                    </div>
                     <img src="homepage/img/press.png" alt="second-image">
                 </div>
             </div>
         </div>
     </div>
-    <script src="homepage/script.js">
-        
+    <script src="homepage/script.js"> </script>
+    <script>
+        document.getElementById('createButton').addEventListener('click', function() {
+    window.location.href = './choicePage.html';
+});
+document.getElementById('galleryButton').addEventListener('click', function() {
+    window.location.href = './galleryView.html';
+});
     </script>
 </body>
 
