@@ -3,82 +3,96 @@
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link rel="preconnect" href="https://fonts.googleapis.com">
-   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+   
+    <!--Instrument Serif, has regular and italics, no light-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+
+    <!--Adobe Fonts-->
+    <link rel="stylesheet" href="https://use.typekit.net/msx0xtk.css">
    <title>Community Gallery</title>
    <style>
         body { 
             background-color: black;
-            font-family: "Inter", Arial, Helvetica, sans-serif;
+            font-family: "mr-eaves-modern", sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
         }
         .sidebar {
-            color: #E9AF66;
-            width: 100px;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            left: 0;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            gap: 20px;
-        }
-        .sidebar h2 {
-            font-family: "Instrument Serif", Arial, Helvetica, sans-serif;
-            writing-mode: vertical-rl;
-            text-orientation: mixed;
-            font-size: 12em;
-            margin-right: 20px;
-            text-align: center;
-            font-weight: 300;
-        }
-        .sidebar .return-home {
-    font-family: "Inter", Arial, Helvetica, sans-serif;
-    font-size: 14px;
-    text-decoration: none;
-    color: #E9AF66;
+        color: #E9AF66;
+        width: 100px;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        left: 0;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .sidebar h2 {
+        font-family: "Instrument Serif", Arial, Helvetica, sans-serif;
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+        font-size: 12em;
+        margin-right: 20px;
+        text-align: center;
+        font-weight: 300;
+    }
+
+    .return-home {
+        font-size: 1.8rem;
+        text-decoration: none;
+        color: #E9AF66;
+        display: flex;
+        align-items: center;
+        gap: 8px; 
+        position: fixed;
+        top: 30px; 
+        left: 30px; 
+        cursor: pointer;
+        transition: color 0.3s ease;
+        z-index: 2000; 
+    }
+    .gallery-container {
+    flex: 1;
+    margin-left: 100px; /* Matches sidebar width */
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 8px; /* Space between arrow and text */
-    margin-top: 20px;
-    cursor: pointer;
-    transition: color 0.3s ease;
-}
+    padding: 20px;
+    overflow-y: auto;
+        }
+    .gallery {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 50px;
+    }
+    .svg-poster {
+        width: 200px;   
+        height: auto;  
+        cursor: pointer;
+        border-radius: 5px;
+        box-shadow: 0 2px 8px rgba(255, 255, 255, 0.3);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
 
-
-        .gallery-container {
-            flex: 1;
-            margin-left: 100px; /* Matches sidebar width */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-            overflow-y: auto;
-        }
-        .gallery {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 50px;
-        }
-        .gallery img {
-            width: 200px;
-            height: auto;
-            cursor: pointer;
-            border-radius: 5px;
-            box-shadow: 0 2px 8px rgba(255, 255, 255, 0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .gallery img:hover {
+        .svg-poster:hover {
             transform: scale(1.1);
             box-shadow: 0 4px 16px rgba(255, 255, 255, 0.5);
         }
+
+        .modal-content svg {
+            width: 100%;  
+            max-width: 500px;  
+            height: auto;  
+        }
+
         .modal {
             display: none;
             position: fixed;
@@ -113,7 +127,7 @@
         }
 
         .modal-content p {
-            font-size: 16px;
+            font-size: 1.5rem;
             line-height: 1.6;
             color: #e6e6e6;
             margin: 0;
@@ -129,7 +143,7 @@
             color: #ffffff;
             cursor: pointer;
         }
-</style>
+    </style>
 </head>
 <body>
     <!-- Sidebar -->
@@ -154,49 +168,107 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Fetch gallery data from the server
-            fetch('/getSavedPosters')
-                .then(response => response.json())
-                .then(data => {
-                    const gallery = document.getElementById('gallery');
+ document.addEventListener('DOMContentLoaded', () => {
+    // Fetch gallery data from the server
+    fetch('/getSavedPosters')
+        .then(response => response.json())
+        .then(data => {
+            const gallery = document.getElementById('gallery');
 
-                    // Populate the gallery with images
-                    data.forEach(poster => {
-                        const img = document.createElement('img');
-                        img.src = poster.img; // Edited image
-                        img.alt = poster.creator || "User Poster";
-                        img.loading = "lazy"; // Lazy loading for performance
-                        img.onclick = () => showModal(poster); // Show modal on click
-                        gallery.appendChild(img);
-                    });
-                })
-                .catch(err => console.error('Error fetching posters:', err));
+            // Populate the gallery with images
+            data.forEach(poster => {
+                if (poster.svg) {
+                    const svgContainer = document.createElement('div');
+                    svgContainer.innerHTML = poster.svg;
 
-            const modal = document.getElementById('modal');
-            const closeModal = document.getElementById('closeModal');
+                    const svgElement = svgContainer.querySelector('svg');
+                    if (svgElement) {
+                        // Resize the SVG for the gallery
+                        svgElement.setAttribute('width', '200px');   // Set width for the gallery view
+                        svgElement.setAttribute('height', 'auto');    // Maintain aspect ratio
 
-            // Close modal on click of close button
-            closeModal.onclick = () => (modal.style.display = 'none');
+                        // Create an image placeholder if needed
+                        const svgWrapper = document.createElement('div');
+                        svgWrapper.classList.add('svg-poster');
+                        svgWrapper.appendChild(svgElement);
 
-            // Show modal with poster details
-            function showModal(poster) {
-                const modalImage = document.getElementById('modalImage');
-                const modalText = document.getElementById('modalText');
+                        // Add SVG wrapper to the gallery
+                        svgWrapper.onclick = () => showModal(poster); // Show modal on click
+                        gallery.appendChild(svgWrapper);
+                    }
+                } else {
+                    // If it's an image, handle like before
+                    const img = document.createElement('img');
+                    img.src = poster.img; // Edited image
+                    img.alt = poster.creator || "User Poster";
+                    img.loading = "lazy"; // Lazy loading for performance
+                    img.onclick = () => showModal(poster); // Show modal on click
+                    gallery.appendChild(img);
+                }
+            });
+        })
+        .catch(err => console.error('Error fetching posters:', err));
 
-                modalImage.src = poster.img;
-                modalText.innerHTML = `
-                    <strong>Creator:</strong> ${poster.creator || "Unknown"}<br>
-                    <strong>Date Created:</strong> ${poster.time || "Not Specified"}<br>
-                `;
-                modal.style.display = 'flex';
-            }
+    const modal = document.getElementById('modal');
+    const closeModal = document.getElementById('closeModal');
 
-            // Close modal on outside click
-            modal.onclick = (event) => {
-                if (event.target === modal) modal.style.display = 'none';
-            };
-        });
+    // Close modal on click of close button
+    closeModal.onclick = () => (modal.style.display = 'none');
+
+    function showModal(poster) {
+    const modalContent = document.querySelector('.modal-content');
+    const modalText = document.getElementById('modalText');
+
+    // Remove any existing image or SVG
+    const existingVisual = modalContent.querySelector('#modalImage');
+    if (existingVisual) existingVisual.remove();
+
+    // Create a container for the SVG or image
+    const visualContainer = document.createElement('div');
+    visualContainer.id = 'modalImage';
+
+    // Check if the poster contains inline SVG
+    if (poster.svg && poster.svg.includes('<svg')) {
+        visualContainer.innerHTML = poster.svg; // Inject the SVG into the container
+        const svgElement = visualContainer.querySelector('svg');
+        if (svgElement) {
+            svgElement.setAttribute('width', '200px');
+            svgElement.setAttribute('height', 'auto');
+            svgElement.style.borderRadius = '10px';
+            svgElement.style.boxShadow = '0 4px 16px rgba(0, 0, 0, 0.5)';
+        }
+    } else {
+        // If not an SVG, use an image element
+        const imgElement = document.createElement('img');
+        imgElement.src = poster.img || ''; // Fallback for non-SVG images
+        imgElement.alt = poster.creator || 'User Poster';
+        imgElement.style.width = '200px';
+        imgElement.style.height = 'auto';
+        imgElement.style.borderRadius = '10px';
+        imgElement.style.boxShadow = '0 4px 16px rgba(0, 0, 0, 0.5)';
+        visualContainer.appendChild(imgElement);
+    }
+
+    // Append the visual container to the modal content
+    modalContent.prepend(visualContainer);
+
+    // Set modal text content
+    modalText.innerHTML = `
+        <strong>Creator:</strong> ${poster.creator || 'Unknown'}<br>
+    `;
+
+    // Display the modal
+    const modal = document.getElementById('modal');
+    modal.style.display = 'flex';
+}
+
+    // Close modal on outside click
+    modal.onclick = (event) => {
+        if (event.target === modal) modal.style.display = 'none';
+    };
+});
+
     </script>
 </body>
 </html>
+

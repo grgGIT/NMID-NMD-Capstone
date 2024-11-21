@@ -1,9 +1,9 @@
 [
-  {
-    "id": 0,
-    "creator": "empty",
-    "time": "empty",
-    "originalPost": "empty",
-    "img": "assets/posterImages/cbPost.jpg"
-  }
+    {
+        "id": 0,
+        "creator": "empty",
+        "time": "empty",
+        "originalPost": "empty",
+        "img": "assets/posterImages/cbPost.jpg"
+    }
 ]
