@@ -336,6 +336,36 @@
             }
         }
 
+        document.getElementById('finishButton').addEventListener('click', async () => {
+    // Capture the SVG data
+    const svgData = svgObject.outerHTML;
+
+    // Prompt the user for additional information
+    const additionalInfo = prompt('Enter additional information for the poster:');
+
+    // Create an object to hold the SVG and additional data
+    const posterData = {
+        svg: svgData,
+        info: additionalInfo
+    };
+
+    // Send the data to the server
+    try {
+        const response = await fetch('/savePoster', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(posterData)
+        });
+
+        const result = await response.json();
+        console.log('Success:', result);
+    } catch (error) {
+        console.error('Error:', error);
+    }
+});
+
     </script>
 </body>
 
