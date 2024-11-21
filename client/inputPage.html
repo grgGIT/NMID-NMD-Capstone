@@ -204,7 +204,7 @@
 
             <!-- Use an object element to load the SVG -->
             <!-- <object id="svgObject" type="image/svg+xml" width="500" height="600" data=""></object> -->
-            <svg id="svgObject"></svg>
+            <svg class="svgObject"></svg>
         </div>
 
         <div id="tools">
@@ -252,7 +252,7 @@
         const textArea = document.getElementById('textBox');
         const colorPicker = document.getElementById('colorPicker');
         const filterMenu = document.getElementById('filter');
-        let svgObject = document.getElementById('svgObject');
+        let svgObject = document.querySelector('.svgObject');
 
         window.onload = async () => {
             let response = await fetch('/getSelectedPosterNumber', {
@@ -267,7 +267,7 @@
             const result = await (await fetch(parsedResponse.svg)).text();
             svgObject.outerHTML = result;
 
-            svgObject = document.getElementById('svgObject');
+            svgObject = document.querySelector('.svgObject');
 
             console.log(svgObject);
 
