@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+        overflow: hidden;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background: #000000;
+        color: white;
+        font-family: "mr-eaves-modern", sans-serif;
+        font-style: normal;
+      }
+      .poster {
+        border: 1px solid #e9af66;
+        padding: 10px;
+        margin: 10px;
+        font-family: "CustomFont3", sans-serif;
+        display: flex;
+        flex-direction: column;
+        height: 70%;
+      }
+
+      #postersContainer {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .image-style {
+        width: 40%;
+        height: auto;
+        justify-content: center;
+      }
+
+      .outlined-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.8rem 4rem;
+        font-size: 1.5rem;
+        font-weight: 400;
+        color: #e9af66;
+        background: transparent;
+        border-radius: 5px;
+        cursor: pointer;
+        white-space: nowrap;
+        font-family: "mr-eaves-modern", sans-serif;
+        font-style: normal;
+        border: 1px solid #e9af66;
+        position: absolute;
+        left: 3%;
+        top: 5%;
+      }
+
+      .image-container {
+        display: flex;
+        justify-content: center; /* Centers the image horizontally */
+        align-items: center; /* Centers the image vertically */
+        width: 100%; /* Ensures the container takes full width */
+        height: auto; /* Adjusts height based on content */
+      }
+      .text-content {
+        display: flex;
+        flex-direction: column;
+        padding: 1%;
+        margin: 2%;
+      }
+      strong {
+        font-weight: 500;
+      }
+    </style>
+  </head>
+  <body>
+    <button class="outlined-button" onclick="history.back(1)">Go Back</button>
+
+    <div id="postersContainer"></div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        fetch("/getPosters")
+          .then((response) => response.json())
+          .then((data) => {
+            const container = document.getElementById("postersContainer");
+            data.forEach((poster) => {
+              const posterDiv = document.createElement("div");
+              posterDiv.className = "poster";
+              posterDiv.innerHTML = `
+                            
+                            <strong>Name:</strong> ${poster.name}<br>
+                            <strong>Creator:</strong> ${
+                              poster.creator || "N/A"
+                            }<br>
+                            <strong>Summary:</strong> ${
+                              poster.summary || "N/A"
+                            }<br>
+                            <strong>Year:</strong> ${poster.year}<br>
+                            <strong>Link:</strong> <a href="${
+                              poster.link
+                            }" target="_blank">${poster.link}</a><br>
+                            <strong>Font:</strong> ${poster.font}<br>
+                            <strong>Type:</strong> ${poster.type}<br> </div>
+                            <div class="image-container"><img src="${
+                              poster.link
+                            }" alt="Poster Image" class="image-style"><div>
+                        `;
+              container.appendChild(posterDiv);
+            });
+          })
+          .catch((error) => console.error("Error fetching posters:", error));
+      });
+    </script>
+  </body>
+</html>
