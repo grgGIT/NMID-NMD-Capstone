@@ -1,0 +1,22 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1516 2500" width="1516" height="2500" id="svgObject">
+	<title>ball-svg</title>
+	<defs>
+		<image  width="1517" height="2500" id="img1" href="assets/posterImages/ballEdit.jpg"/>
+		<clipPath clipPathUnits="userSpaceOnUse" id="cp1">
+			<path d="m262.1 1926.95h991.78c3.43 0 6.2 2.78 6.2 6.2v100.03c0 3.43-2.77 6.21-6.2 6.21h-991.78c-3.43 0-6.21-2.78-6.21-6.21v-100.03c0-3.42 2.78-6.2 6.21-6.2z"/>
+		</clipPath>
+	</defs>
+	<style>
+		tspan { white-space:pre } 
+		.s0 { fill: none;stroke: none;stroke-width: 15.5 } 
+		.t1 { font-size: 9px;fill: #ffffff;font-weight: 400;font-family: "font2" } 
+	</style>
+	<use  href="#img1" x="-1" y="0"/>
+	<g id="Clip-Path" clip-path="url(#cp1)">
+		<path class="s0" d="m262.1 1927h991.8c3.4 0 6.2 2.7 6.2 6.2v100c0 3.4-2.8 6.2-6.2 6.2h-991.8c-3.4 0-6.2-2.8-6.2-6.2v-100c0-3.5 2.8-6.2 6.2-6.2z"/>
+	</g>
+	<text id="Edit this text please" style="transform: matrix(7.563,.026,-0.034,9.807,373,2024.134)" class="t1">Edit this text please</text>
+		<!-- <tspan x="0" y="0" class="t1">Edit this text plea</tspan><tspan  y="0" class="t1">s</tspan><tspan  y="0" class="t1">e</tspan><tspan  y="0" class="t1">
+</tspan> -->
+	<!-- </text> -->
+</svg>

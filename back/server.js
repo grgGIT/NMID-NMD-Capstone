@@ -11,6 +11,8 @@ app.use(express.json());
 const originalsPath = path.join(__dirname, 'posters.json');
 const editedPath = path.join(__dirname, 'uploads', 'edited.json');
 
+let selectedPosterId = 1;
+
 // Ensure the data file exists
 if (!fs.existsSync(originalsPath)) {
     fs.writeFileSync(originalsPath, JSON.stringify([]));
@@ -43,7 +45,22 @@ app.get('/getSavedPosters', (req, res) => {
 
 app.get('/getSelectedPosterNumber', (req, res) => {
 
-    res.json({id: 1, svg: 'assets/geoff-nuclear-svg.svg'});
+    // res.json({id: 1, svg: 'assets/geoff-nuclear-svg.svg'});
+    // res.json({id: 2, svg: 'assets/geoff-ball-svg.svg'});
+
+    if (selectedPosterId === 7) {
+        res.json({id: 7, svg: 'assets/geoff-nuclear-svg.svg'});
+    }
+    else {
+        res.json({id: 5, svg: 'assets/geoff-ball-svg.svg'});
+    }
+});
+
+app.post('/selectPoster', (req, res) => {
+    console.log('Youre in the post request!');
+    selectedPosterId = req.body.id;
+    console.log(`Selected Poster ID Is ${selectedPosterId}`);
+    res.json({ message: 'Poster selection submitted successfully' });
 });
 
 app.post( '/savePoster', (req, res) => {

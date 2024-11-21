@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    
+
     fetch('/getPosters')
         .then(response => response.json())
         .then(data => {
@@ -62,8 +62,27 @@ document.addEventListener('DOMContentLoaded', () => {
                 continueButton.classList.add('enabled');
             }
 
-            continueButton.addEventListener('click', () => {
+            continueButton.addEventListener('click', async () => {
+                
                 if (activePoster) {
+                    // Send the data to the server
+                    console.log(activePoster);
+                try {
+                    const response = await fetch('/selectPoster', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({id: activePoster.id})
+                    });
+
+                    const result = await response.json();
+                    console.log('Success:', result);
+                    
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+                
                     window.location.href = `/inputPage.html`;
                 }
             });
