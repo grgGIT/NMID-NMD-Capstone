@@ -48,11 +48,11 @@ app.get('/getSelectedPosterNumber', (req, res) => {
     // res.json({id: 1, svg: 'assets/geoff-nuclear-svg.svg'});
     // res.json({id: 2, svg: 'assets/geoff-ball-svg.svg'});
 
-    if (selectedPosterId === 5) {
-        res.json({id: 5, svg: 'assets/geoff-nuclear-svg.svg'});
+    if (selectedPosterId === 7) {
+        res.json({id: 7, svg: 'assets/geoff-nuclear-svg.svg'});
     }
     else {
-        res.json({id: 7, svg: 'assets/geoff-ball-svg.svg'});
+        res.json({id: 5, svg: 'assets/geoff-ball-svg.svg'});
     }
 });
 
