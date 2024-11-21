@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const overlay = document.getElementById('overlay');
             const infoPane = document.getElementById('infoPane');
             const continueButton = document.getElementById('continue-button');
+            const exitButton = document.querySelector('.exit-button');
             let activePoster = null;
             let activePosterDiv = null;
 
@@ -63,8 +64,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             continueButton.addEventListener('click', () => {
                 if (activePoster) {
-                    window.location.href = `/inputPage.html/${activePoster.id}`;
+                    window.location.href = `/inputPage.html`;
                 }
+            });
+
+            exitButton.addEventListener('click', () => {
+                window.location.href = `/`;
             });
         })
         .catch(error => {

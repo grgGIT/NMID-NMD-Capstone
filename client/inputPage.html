@@ -8,7 +8,7 @@
     <style>
         @font-face {
             font-family: "font2";
-            src: url("./assets/fonts/font2.ttf") format("truetype");
+            src: url("./assets/fonts/Rubik-Bold.ttf") format("truetype");
         }
 
         body {
@@ -339,7 +339,7 @@
             const svgData = svgObject.outerHTML;
 
             // Prompt the user for additional information
-            const additionalInfo = prompt('Enter additional information for the poster:');
+            const additionalInfo = prompt('Enter your name:');
 
             // Create an object to hold the SVG and additional data
             const posterData = {
@@ -359,6 +359,7 @@
 
                 const result = await response.json();
                 console.log('Success:', result);
+                window.location.href = `/`;
             } catch (error) {
                 console.error('Error:', error);
             }
