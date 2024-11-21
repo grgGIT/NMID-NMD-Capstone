@@ -1,7 +1,7 @@
-<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1861 2500" width="1861" height="2500">
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1861 2500" width="1861" height="2500" id="svgObject">
 	<title>nuclear-svg</title>
 	<defs>
-		<image  width="1861" height="2500" id="img1" href="./posterImages/nuclear-policyEdit.jpg"/>
+		<image  width="1861" height="2500" id="img1" href="assets/posterImages/nuclear-policyEdit.jpg"/>
 		<clipPath clipPathUnits="userSpaceOnUse" id="cp1">
 			<path d="m53.52 2317.72h1753.8c3.43 0 6.21 2.78 6.21 6.21v100.06c0 3.42-2.78 6.2-6.21 6.2h-1753.8c-3.43 0-6.2-2.78-6.2-6.2v-100.06c0-3.43 2.77-6.21 6.2-6.21z"/>
 		</clipPath>

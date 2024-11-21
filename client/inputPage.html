@@ -8,7 +8,7 @@
     <style>
         @font-face {
             font-family: "font2";
-            src: url("./fonts/font2.ttf") format("truetype");
+            src: url("http://localhost:3000/assets/fonts/font2.ttf") format("truetype");
 
         }
 
@@ -205,7 +205,8 @@
               </svg> -->
 
             <!-- Use an object element to load the SVG -->
-            <object id="svgObject" type="image/svg+xml" width="500" height="600" data=""></object>
+            <!-- <object id="svgObject" type="image/svg+xml" width="500" height="600" data=""></object> -->
+             <svg id="svgObject"></svg>
         </div>
 
         <div id="tools">
@@ -253,7 +254,7 @@
         const textArea = document.getElementById('textBox');
         const colorPicker = document.getElementById('colorPicker');
         const filterMenu = document.getElementById('filter');
-        const svgObject = document.getElementById('svgObject');
+        let svgObject = document.getElementById('svgObject');
 
         window.onload = async () => {
             let response = await fetch('/getSelectedPosterNumber', {
@@ -265,18 +266,27 @@
             let parsedResponse = await response.json();
             console.log(parsedResponse.id, parsedResponse.svg);
 
-            svgObject.data = parsedResponse.svg;
+            const result = await (await fetch(parsedResponse.svg)).text();
+            svgObject.outerHTML = result;
+
+            svgObject = document.getElementById('svgObject');
+
+            console.log(svgObject);
+
+            svgSetup();
+            // svgObject.data = parsedResponse.svg;
         };
 
-        // Wait for the SVG to load
-        svgObject.addEventListener('load', function () {
-            const svgDoc = this.contentDocument;
+       
+        function svgSetup () {
 
-            const svgElement = svgDoc.querySelector('*');
+            // const svgDoc = this.contentDocument;
 
-            const textElement = svgDoc.getElementById('Edit this text please'); // Ensure this ID matches the SVG's text element ID
+            // const svgElement = svgDoc.querySelector('*');
 
-            const textOutline = svgDoc.querySelector('.s0');
+            const textElement = svgObject.getElementById('Edit this text please'); // Ensure this ID matches the SVG's text element ID
+
+            const textOutline = svgObject.querySelector('.s0');
 
             if (textElement) {
 
@@ -295,16 +305,16 @@
                 filterMenu.addEventListener('input', () => {
                     switch (filterMenu.value) {
                         case 'none':
-                            svgElement.style.filter = 'none';
+                            svgObject.style.filter = 'none';
                             break;
                         case 'light':
-                            svgElement.style.filter = 'brightness(1.8)';
+                            svgObject.style.filter = 'brightness(1.8)';
                             break;
                         case 'dark':
-                            svgElement.style.filter = 'brightness(0.8)';
+                            svgObject.style.filter = 'brightness(0.8)';
                             break;
                         default:
-                            svgElement.style.filter = 'none';
+                            svgObject.style.filter = 'none';
                     }
                 });
 
@@ -324,7 +334,7 @@
             } else {
                 console.error('Text element not found in SVG');
             }
-        });
+        }
 
     </script>
 </body>
