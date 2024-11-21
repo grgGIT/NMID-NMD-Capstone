@@ -4,34 +4,53 @@
         "name": " ball ",
         "title" : "Hippodrome au Pont de l'Alma",
         "original post": "https://digitalcollections.rit.edu/luna/servlet/detail/RIT~1~1~692~5016:Hippodrome-au-Pont-de-L-Alma---Cade?sort=title%2Ccreator%2Cdate&qvq=q:filename%3D%22cc_poster4050.jpg%22;sort:title%2Ccreator%2Cdate;lc:RIT~1~1&mi=0&trs=1",
-        "creator": "john.c.calhoun@examplepetstore.com",
+        "creator": "Jacqueline Casey",
         "link": "assets/originalWorks/ball.png",
         "password": "123456",
         "font": "assets/fonts/font3.ttf",
-        "svg": "assets/posterImages/geoff-nuclear-svg.svg"
+        "svg": "assets/posterImages/geoff-nuclear-svg.svg", 
+        "summary": "A promotion for a quisquacentennial celebration at Massachusetts Institute of Technology. Designer Jacqueline Casey was a fashion illustrator and editorial designer who worked for MIT’s Office of Publications.",
+        "year": "1984",
+        "type": "Poster"
     },
     {
         "id": 6,
         "name": "Guidebook",
         "title" : "Hippodrome au Pont de l'Alma",
         "original post": "https://digitalcollections.rit.edu/luna/servlet/detail/RIT~1~1~692~5016:Hippodrome-au-Pont-de-L-Alma---Cade?sort=title%2Ccreator%2Cdate&qvq=q:filename%3D%22cc_poster4050.jpg%22;sort:title%2Ccreator%2Cdate;lc:RIT~1~1&mi=0&trs=1",
-        "creator": "john.c.calhoun@examplepetstore.com",
+        "creator": "Elaine Lustig Cohen",
         "link": "assets/originalWorks/guidebook.png",
         "password": "123456",
         "font": "assets/fonts/font3.ttf",
-        "svg": "assets/posterImages/geoff-nuclear-svg.svg"
+        "svg": "assets/posterImages/geoff-nuclear-svg.svg",
+        "summary": "This NYC guidebook sets itself apart from others of its time by highlighting more unusual or lesser known aspects of the city’s people, places and attractions. As author Kate Simon puts it, the visitors can discover “the beat and the offbeat, the ordinary and the bizarre.”",
+        "year": "1958" ,
+        "type": "Book Cover"
     },
     {
         "id": 7,
         "name": "Nuclear Policy",
         "title" : "Hippodrome au Pont de l'Alma",
         "original post": "https://digitalcollections.rit.edu/luna/servlet/detail/RIT~1~1~692~5016:Hippodrome-au-Pont-de-L-Alma---Cade?sort=title%2Ccreator%2Cdate&qvq=q:filename%3D%22cc_poster4050.jpg%22;sort:title%2Ccreator%2Cdate;lc:RIT~1~1&mi=0&trs=1",
-        "creator": "john.c.calhoun@examplepetstore.com",
+        "creator": "Saul Bass",
         "link": "assets/originalWorks/nuclear-policy.png",
+        "password": "123456",
+        "font": "assets/fonts/font3.ttf",
+        "svg": "assets/posterImages/geoff-nuclear-svg.svg",
+        "summary": "SANE was founded in 1957 as a response to nuclear bomb testing and the arms race. Its mission was to “develop public support for a boldly conceived and executed policy which will lead mankind away from war and toward justice and peace,” seeking to keep nuclear power within safe and human bounds.",
+        "year": "1959",
+        "type": "Poster"
+    },
+    {
+        "id": 8,
+        "name": "  ",
+        "title" : "Hippodrome au Pont de l'Alma",
+        "original post": "https://digitalcollections.rit.edu/luna/servlet/detail/RIT~1~1~692~5016:Hippodrome-au-Pont-de-L-Alma---Cade?sort=title%2Ccreator%2Cdate&qvq=q:filename%3D%22cc_poster4050.jpg%22;sort:title%2Ccreator%2Cdate;lc:RIT~1~1&mi=0&trs=1",
+        "creator": "john.c.calhoun@examplepetstore.com",
+        "link": "assets/originalWorks/oblivion.jpg",
         "password": "123456",
         "font": "assets/fonts/font3.ttf",
         "svg": "assets/posterImages/geoff-nuclear-svg.svg"
     }
-    
     
 ]
