@@ -47,7 +47,23 @@ app.get('/getSelectedPosterNumber', (req, res) => {
 });
 
 app.post( '/savePoster', (req, res) => {
-    
+    const newPosterData = req.body;
+
+    fs.readFile(editedPath, (err, data) => {
+        if (err) {
+            return res.status(500).json({ error: 'Failed to read data file' });
+        }
+
+        const posters = JSON.parse(data);
+        posters.push(newPosterData);
+
+        fs.writeFile(editedPath, JSON.stringify(posters, null, 2), (err) => {
+            if (err) {
+                return res.status(500).json({ error: 'Failed to save data' });
+            }
+            res.json({ message: 'Poster saved successfully' });
+        });
+    });
 });
 
 // Define a route to serve the homepage

@@ -31,17 +31,7 @@
         "password": "123456",
         "font": "assets/fonts/font3.ttf",
         "svg": "assets/posterImages/geoff-nuclear-svg.svg"
-    },
-    {
-        "id": 8,
-        "name": "  ",
-        "title" : "Hippodrome au Pont de l'Alma",
-        "original post": "https://digitalcollections.rit.edu/luna/servlet/detail/RIT~1~1~692~5016:Hippodrome-au-Pont-de-L-Alma---Cade?sort=title%2Ccreator%2Cdate&qvq=q:filename%3D%22cc_poster4050.jpg%22;sort:title%2Ccreator%2Cdate;lc:RIT~1~1&mi=0&trs=1",
-        "creator": "john.c.calhoun@examplepetstore.com",
-        "link": "assets/originalWorks/oblivion.jpg",
-        "password": "123456",
-        "font": "assets/fonts/font3.ttf",
-        "svg": "assets/posterImages/geoff-nuclear-svg.svg"
     }
+    
     
 ]
